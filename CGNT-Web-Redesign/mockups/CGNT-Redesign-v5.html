@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copper Giant Resources | Rise With Copper</title>
+  <!-- Google Fonts CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM: Apple × Linear × Vercel
+       ========================================================================== */
+    :root {
+      --accent: #FF002C;
+      --accent-hover: #ff3355;
+      --accent-glow: rgba(255, 0, 44, 0.15);
+      --bg-deep: #010102;
+      --bg-canvas: #08090a;
+      --bg-panel: #0f1011;
+      --bg-surface: #191a1b;
+      --text-primary: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --text-tertiary: #8a8f98;
+      --border-subtle: rgba(255, 255, 255, 0.05);
+      --border-accent: rgba(255, 0, 44, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: clamp(64px, 8vw, 120px);
+      font-weight: 600;
+      letter-spacing: -2.4px;
+      line-height: 1;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 500;
+      letter-spacing: -0.8px;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      letter-spacing: -0.4px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .subtext {
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin-bottom: 48px;
+    }
+
+    .tnum {
+      font-family: 'JetBrains Mono', monospace;
+      font-feature-settings: 'tnum';
+    }
+
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+
+    /* 1. TICKER BAR */
+    .ticker-bar {
+      background-color: var(--bg-deep);
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 1000;
+    }
+    .ticker-bar span strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .ticker-bar span .green { color: #00ff88; }
+
+    /* 2. GLASS NAV */
+    .glass-nav {
+      position: sticky;
+      top: 0;
+      height: 56px;
+      background: rgba(8, 9, 10, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo-img {
+      height: 24px;
+      width: auto;
+    }
+    
+    .nav-brand {
+      font-weight: 600;
+      letter-spacing: -0.4px;
+      font-size: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-social {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--text-tertiary);
+    }
+
+    .nav-social a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-social a:hover { color: var(--text-primary); }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 28px;
+      border-radius: 24px;
+      font-weight: 500;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-pill-sm {
+      height: 36px;
+      padding: 0 20px;
+    }
+
+    .btn-accent {
+      background-color: var(--accent);
+      color: #fff;
+    }
+    .btn-accent:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+    .btn-ghost:hover {
+      border-color: var(--text-secondary);
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    /* Layout & Sections */
+    .section-100vh {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 32px;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bg-deep { background-color: var(--bg-deep); }
+    .bg-canvas { background-color: var(--bg-canvas); }
+    .bg-panel { background-color: var(--bg-panel); }
+
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .bento-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bento-card:hover {
+      border-color: var(--border-accent);
+      box-shadow: 0 8px 32px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    .bento-card-glass {
+      background: rgba(25, 26, 27, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .col-12 { grid-column: span 12; }
+    .col-8 { grid-column: span 8; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    .col-3 { grid-column: span 3; }
+    .col-2 { grid-column: span 2; }
+
+    /* specific bento elements */
+    .stat-value {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .stat-value span { color: var(--accent); }
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Hero Glow */
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80vw;
+      height: 80vw;
+      max-width: 1000px;
+      max-height: 1000px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    /* Latest News Slider */
+    .news-slider-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .news-slider {
+      display: flex;
+      gap: 12px;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .news-card {
+      min-width: calc(33.333% - 8px);
+      flex: 0 0 calc(33.333% - 8px);
+    }
+    .news-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .news-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: auto;
+      padding-top: 24px;
+    }
+    .slider-controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      justify-content: flex-end;
+    }
+    .slider-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .slider-btn:hover {
+      border-color: var(--border-accent);
+      color: var(--accent);
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border-left: 2px solid var(--border-subtle);
+      padding-left: 24px;
+      margin-left: 12px;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -31px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--accent);
+    }
+    .timeline-year {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* Footer */
+    footer {
+      padding: 64px 32px 32px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-canvas);
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .col-3, .col-4 { grid-column: span 6; }
+      .news-card { min-width: calc(50% - 6px); flex: 0 0 calc(50% - 6px); }
+      .hero-actions { margin-bottom: 40px; }
+      h1 { font-size: 64px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-social { display: none; }
+      .bento-grid { display: flex; flex-direction: column; }
+      .col-2, .col-3, .col-4, .col-6, .col-8, .col-12 { grid-column: span 12; width: 100%; }
+      .section-100vh { padding: 80px 24px; }
+      .news-card { min-width: 100%; flex: 0 0 100%; }
+      h1 { font-size: 48px; }
+      h2 { font-size: 32px; }
+      .stat-value { font-size: 32px; }
+      .footer-content { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. TICKER BAR -->
+  <div class="ticker-bar">
+    <span>TSXV <strong>CGNT</strong> C$0.64 <span class="green">▲</span></span>
+    <span style="opacity:0.3">|</span>
+    <span>OTC <strong>LBCMF</strong> $0.48 <span class="green">▲</span></span>
+    <span style="opacity:0.3">|</span>
+    <span>FSE <strong>29H0</strong> €0.41 <span class="green">▲</span></span>
+  </div>
+
+  <!-- 2. GLASS NAV -->
+  <nav class="glass-nav">
+    <div class="nav-left">
+      <img src="../assets/logo-cgnt.webp" alt="Copper Giant Logo" class="nav-logo-img">
+      <a href="#" class="nav-brand">COPPER GIANT</a>
+    </div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#mocoa">Mocoa</a>
+      <a href="#investors">Investors</a>
+      <a href="#corporate">Corporate</a>
+      <a href="#news">News</a>
+    </div>
+    <div class="nav-social">
+      <a href="#">𝕏</a>
+      <a href="#">in</a>
+      <a href="#" class="btn-pill btn-pill-sm btn-accent" style="color:#fff; margin-left: 12px;">Rise With Copper</a>
+    </div>
+  </nav>
+
+  <!-- 3. HERO -->
+  <section id="home" class="section-100vh bg-deep">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <span class="label fade-up">PROPERTY · TEAM · SPONSORSHIP · TIMING</span>
+      <h1 class="fade-up delay-1">RISE WITH COPPER</h1>
+      <p class="subtext fade-up delay-2">Backed by Frank Giustra and the Fiore Group, Copper Giant is advancing the 1.1B+ tonne copper-molybdenum project in Colombia.</p>
+      
+      <div class="hero-actions fade-up delay-3">
+        <a href="#" class="btn-pill btn-accent">GET UPDATES</a>
+        <a href="#" class="btn-pill btn-ghost">PRESENTATION</a>
+      </div>
+
+      <div class="bento-grid fade-up delay-4">
+        <div class="bento-card col-2">
+          <div class="stat-value tnum">1.1<span>B</span></div>
+          <div class="stat-label">Tonne Resource</div>
+        </div>
+        <div class="bento-card col-2">
+          <div class="stat-value tnum">7.6<span>B</span></div>
+          <div class="stat-label">lbs Copper</div>
+        </div>
+        <div class="bento-card col-2">
+          <div class="stat-value tnum">1<span>B</span></div>
+          <div class="stat-label">lbs Molybdenum</div>
+        </div>
+        <div class="bento-card col-2">
+          <div class="stat-value tnum">C$23<span>M</span></div>
+          <div class="stat-label">Cash</div>
+        </div>
+        <div class="bento-card col-2">
+          <div class="stat-value tnum">54</div>
+          <div class="stat-label">Drill Holes</div>
+        </div>
+        <div class="bento-card col-2">
+          <div class="stat-value tnum">37,000<span>m</span></div>
+          <div class="stat-label">Drilled</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LATEST NEWS -->
+  <section id="news" class="section-100vh bg-canvas">
+    <div class="container">
+      <span class="label fade-up">LATEST NEWS</span>
+      <div class="news-slider-wrapper fade-up delay-1">
+        <div class="news-slider" id="newsSlider">
+          <div class="bento-card news-card">
+            <span class="news-tag">PRESS RELEASE</span>
+            <h3>Copper Giant Begins Planned Comprehensive PEA for Mocoa with Globally Recognized Development Team</h3>
+            <div class="news-date tnum">OCTOBER 12, 2025</div>
+          </div>
+          <div class="bento-card news-card">
+            <span class="news-tag">PRESS RELEASE</span>
+            <h3>Copper Giant Secures Long-Term Development Framework with Colombian Government; Third Drill Rig Operational</h3>
+            <div class="news-date tnum">SEPTEMBER 28, 2025</div>
+          </div>
+          <div class="bento-card news-card">
+            <span class="news-tag">PRESS RELEASE</span>
+            <h3>Copper Giant's First Directional Daughter Holes Beat Resource Model at Mocoa</h3>
+            <div class="news-date tnum">SEPTEMBER 10, 2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-controls fade-up delay-2">
+        <button class="slider-btn" id="prevBtn">←</button>
+        <button class="slider-btn" id="nextBtn">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DRILLING HIGHLIGHTS -->
+  <section class="section-100vh bg-deep">
+    <div class="container">
+      <span class="label fade-up">DRILLING HIGHLIGHTS</span>
+      <h2 class="fade-up delay-1">Exceptional Results Across the System</h2>
+      
+      <div class="bento-grid fade-up delay-2">
+        <!-- Feature Card -->
+        <div class="bento-card col-12" style="background: linear-gradient(135deg, var(--bg-surface) 0%, #2a0810 100%); border-color: var(--border-accent);">
+          <div class="label" style="color: #fff;">FEATURE HOLE</div>
+          <h3 style="font-size: 32px; margin-bottom: 8px;">MD-043</h3>
+          <p style="font-size: 24px; color: var(--text-primary); margin-bottom: 0;">
+            <span class="tnum">840m</span> at <span class="tnum" style="color: var(--accent);">0.83% CuEq</span>
+          </p>
+          <p style="color: var(--text-secondary);">incl. <span class="tnum">251m</span> at <span class="tnum">1.32% CuEq</span></p>
+        </div>
+
+        <!-- Grid Cards -->
+        <div class="bento-card col-3">
+          <h3>MD-044</h3>
+          <p class="tnum" style="color: var(--accent); font-size: 20px; margin-bottom:4px;">0.71% CuEq</p>
+          <p class="tnum" style="margin-bottom:0; font-size: 14px;">Over 612m</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>MD-045</h3>
+          <p class="tnum" style="color: var(--accent); font-size: 20px; margin-bottom:4px;">0.64% CuEq</p>
+          <p class="tnum" style="margin-bottom:0; font-size: 14px;">Over 528m</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>MD-046</h3>
+          <p class="tnum" style="color: var(--accent); font-size: 20px; margin-bottom:4px;">0.92% CuEq</p>
+          <p class="tnum" style="margin-bottom:0; font-size: 14px;">Over 396m</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>MD-047</h3>
+          <p class="tnum" style="color: var(--accent); font-size: 20px; margin-bottom:4px;">0.58% CuEq</p>
+          <p class="tnum" style="margin-bottom:0; font-size: 14px;">Over 744m</p>
+        </div>
+      </div>
+      
+      <div class="fade-up delay-3" style="margin-top: 40px; text-align: center;">
+        <a href="#" class="btn-pill btn-ghost">VIEW ALL DRILLING RESULTS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. THE MAKING OF THE GIANT -->
+  <section id="mocoa" class="section-100vh bg-canvas">
+    <div class="container">
+      <span class="label fade-up">MOCOA PROJECT</span>
+      <h2 class="fade-up delay-1">The Making of a Giant</h2>
+      
+      <div class="bento-grid fade-up delay-2">
+        <div class="bento-card col-8">
+          <p>Mocoa is one of the largest undeveloped copper-molybdenum deposits in the Americas, located in southern Colombia. Recent exploration success has revealed potential well beyond its original footprint.</p>
+          <p>Copper Giant holds 100% interest in the project — a billion-tonne resource near surface in a tier-1 jurisdiction with existing infrastructure.</p>
+          <p style="margin-bottom:0;">The scale matters in this market. With copper fundamentals tightening and a structural supply gap widening every quarter, Mocoa is positioned to be a strategic answer.</p>
+        </div>
+        <div class="bento-card col-4">
+          <div class="label" style="margin-bottom: 16px;">TIMELINE</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2018</div>
+              <div class="timeline-title">Acquisition</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2022</div>
+              <div class="timeline-title">Exploration Restart</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <div class="timeline-title">High-Grade Discovery</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <div class="timeline-title">Resource Update</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card col-3">
+          <h3>Scale</h3>
+          <p style="margin-bottom:0; font-size: 15px;">1.12B tonnes at 0.51% CuEq</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>Grade</h3>
+          <p style="margin-bottom:0; font-size: 15px;">High-grade zones up to 1.32% CuEq</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>Upside</h3>
+          <p style="margin-bottom:0; font-size: 15px;">Open in all directions, district-scale potential</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>Team</h3>
+          <p style="margin-bottom:0; font-size: 15px;">Led by team that built Mirador and other major mines</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. MINERAL RESOURCE -->
+  <section class="section-100vh bg-deep">
+    <div class="container">
+      <span class="label fade-up">MINERAL RESOURCE</span>
+      <h2 class="fade-up delay-1">1.12 Billion Tonnes at 0.51% CuEq</h2>
+
+      <div class="bento-grid fade-up delay-2">
+        <div class="bento-card col-6">
+          <div class="label">INDICATED RESOURCE</div>
+          <div class="bento-grid" style="gap: 24px; margin-top: 12px;">
+            <div>
+              <div class="stat-value tnum" style="font-size: 28px;">X<span>Mt</span></div>
+              <div class="stat-label">Tonnes</div>
+            </div>
+            <div>
+              <div class="stat-value tnum" style="font-size: 28px;">X<span>%</span></div>
+              <div class="stat-label">CuEq</div>
+            </div>
+            <div>
+              <div class="stat-value tnum" style="font-size: 28px;">X<span>%</span></div>
+              <div class="stat-label">Cu</div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-card col-6">
+          <div class="label">INFERRED RESOURCE</div>
+          <div class="bento-grid" style="gap: 24px; margin-top: 12px;">
+            <div>
+              <div class="stat-value tnum" style="font-size: 28px;">X<span>Mt</span></div>
+              <div class="stat-label">Tonnes</div>
+            </div>
+            <div>
+              <div class="stat-value tnum" style="font-size: 28px;">X<span>%</span></div>
+              <div class="stat-label">CuEq</div>
+            </div>
+            <div>
+              <div class="stat-value tnum" style="font-size: 28px;">X<span>%</span></div>
+              <div class="stat-label">Cu</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card col-4">
+          <div class="label">EXPLORATION</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-secondary);">
+            <li class="tnum"><strong style="color:var(--text-primary)">54</strong> Total Drill Holes</li>
+            <li class="tnum"><strong style="color:var(--text-primary)">+37,000m</strong> Total Metres</li>
+            <li class="tnum"><strong style="color:var(--text-primary)">1,235m</strong> Deepest Hole</li>
+            <li>Open in all directions</li>
+          </ul>
+        </div>
+        <div class="bento-card col-4">
+          <div class="label">LOCATION</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-secondary);">
+            <li>Putumayo Department, Colombia</li>
+            <li class="tnum">600km SW of Bogotá</li>
+            <li class="tnum">Elevation 1,300-1,600m</li>
+            <li>Paved roads access</li>
+          </ul>
+        </div>
+        <div class="bento-card col-4">
+          <div class="label">INFRASTRUCTURE</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-secondary);">
+            <li class="tnum">5km to national road</li>
+            <li class="tnum">230kVA power available</li>
+            <li class="tnum">10km to Mocoa city</li>
+            <li class="tnum">50km to airport</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CORPORATE (FIORE GROUP) -->
+  <section id="corporate" class="section-100vh bg-canvas">
+    <div class="container">
+      <span class="label fade-up">CORPORATE</span>
+      <h2 class="fade-up delay-1">Part of the Fiore Group</h2>
+
+      <div class="bento-grid fade-up delay-2">
+        <div class="bento-card col-8">
+          <p style="font-size: 20px; color: var(--text-primary);">Copper Giant is part of the Fiore Group, a private and well-established Canadian organization known for building successful, high-impact companies across the natural resource sector.</p>
+          <div style="height: 1px; background: var(--border-subtle); margin: 32px 0;"></div>
+          <div class="label">FRANK GIUSTRA</div>
+          <p style="font-size: 15px; margin-bottom: 0;">Founder of Fiore Group. Instrumental in formation of Wheaton Precious Metals (pioneered streaming model), founded Endeavour Mining, co-founded Aris Mining, founded Lionsgate Entertainment. Born in Sudbury, Ontario to an immigrant miner father.</p>
+        </div>
+        
+        <div class="bento-card col-4" style="background-color: var(--accent); color: white; border: none;">
+          <h3 style="color: white;">Fiore Track Record</h3>
+          <div class="stat-value tnum" style="color: white; font-size: 48px; margin-top: 24px;">$30B+</div>
+          <p style="color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 24px;">Market cap created</p>
+          
+          <div class="stat-value tnum" style="color: white; font-size: 48px;">7</div>
+          <p style="color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 24px;">Portfolio companies</p>
+          
+          <div class="stat-value tnum" style="color: white; font-size: 48px;">40+</div>
+          <p style="color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 0;">Years in mining</p>
+        </div>
+
+        <div class="bento-card col-3">
+          <h3>Vision</h3>
+          <p style="font-size: 14px; margin:0;">To be a leading copper producer contributing to the global energy transition</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>Responsibility</h3>
+          <p style="font-size: 14px; margin:0;">Highest standards of environmental and social responsibility</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>Community</h3>
+          <p style="font-size: 14px; margin:0;">Building lasting relationships through Good Neighbor philosophy</p>
+        </div>
+        <div class="bento-card col-3">
+          <h3>Impact</h3>
+          <p style="font-size: 14px; margin:0;">Creating enduring value for all stakeholders</p>
+        </div>
+      </div>
+
+      <div class="fade-up delay-3" style="margin-top: 40px; text-align: center;">
+        <a href="#" class="btn-pill btn-ghost">MEET THE TEAM</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. THE COPPER GIANT WAY (ESG) -->
+  <section class="section-100vh bg-deep">
+    <div class="container">
+      <span class="label fade-up">OUR IMPACT</span>
+      <h2 class="fade-up delay-1">The Copper Giant Way</h2>
+      <p class="subtext fade-up delay-2" style="max-width: 600px;">We believe that successful mining projects are built on a foundation of trust, respect, and shared value.</p>
+
+      <div class="bento-grid fade-up delay-3">
+        <div class="bento-card col-4">
+          <div class="stat-value tnum">164</div>
+          <div class="stat-label">Employees (89% from Putumayo)</div>
+        </div>
+        <div class="bento-card col-4">
+          <div class="stat-value tnum">230</div>
+          <div class="stat-label">Local suppliers</div>
+        </div>
+        <div class="bento-card col-4">
+          <div class="stat-value tnum">527</div>
+          <div class="stat-label">Jobs created</div>
+        </div>
+
+        <div class="bento-card col-6">
+          <div class="label">VALUES</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+            <li><strong>Community First:</strong> Building genuine relationships based on respect, transparency, and mutual benefit</li>
+            <li><strong>Local Strength:</strong> Prioritizing local hiring and procurement</li>
+            <li><strong>Environmental Stewardship:</strong> Committed to responsible mining practices</li>
+            <li><strong>Good Neighbor:</strong> Operating as a responsible member of the community</li>
+          </ul>
+        </div>
+        <div class="bento-card col-6">
+          <div class="label">ESG INITIATIVES</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+            <li>Comprehensive environmental management system</li>
+            <li>Continuous environmental monitoring</li>
+            <li>Community development programs</li>
+            <li>Transparent stakeholder engagement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. INVESTOR HIGHLIGHTS -->
+  <section id="investors" class="section-100vh bg-canvas">
+    <div class="container">
+      <span class="label fade-up">INVESTORS</span>
+      <h2 class="fade-up delay-1">Financial Strength & Strategic Position</h2>
+
+      <div class="bento-grid fade-up delay-2">
+        <div class="bento-card col-3">
+          <div class="stat-value tnum">C$23<span>M</span></div>
+          <div class="stat-label">Cash</div>
+        </div>
+        <div class="bento-card col-3">
+          <div class="stat-value tnum">Zero</div>
+          <div class="stat-label">Debt</div>
+        </div>
+        <div class="bento-card col-3">
+          <div class="stat-value tnum">100<span>%</span></div>
+          <div class="stat-label">Ownership of Mocoa</div>
+        </div>
+        <div class="bento-card col-3">
+          <div class="stat-value tnum">TSXV</div>
+          <div class="stat-label">Listed</div>
+        </div>
+
+        <div class="bento-card col-6">
+          <div class="label">2026 EXPLORATION PLAN</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+            <li class="tnum">23,000m drilling planned (+80% vs 2025)</li>
+            <li>30-50% resource conversion target</li>
+            <li>District drill testing</li>
+            <li>PEA targeted H2 2026</li>
+          </ul>
+        </div>
+
+        <div class="bento-card col-6">
+          <div class="label">EVENTS</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+            <li style="display: flex; justify-content: space-between; align-items: center;">
+              SMI Panama <a href="#" style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 12px; text-decoration: none;">REQUEST MEETING →</a>
+            </li>
+            <li style="display: flex; justify-content: space-between; align-items: center;">
+              121 London <a href="#" style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 12px; text-decoration: none;">REQUEST MEETING →</a>
+            </li>
+            <li style="display: flex; justify-content: space-between; align-items: center;">
+              Berlin Roadshow <a href="#" style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 12px; text-decoration: none;">REQUEST MEETING →</a>
+            </li>
+            <li style="display: flex; justify-content: space-between; align-items: center;">
+              Frankfurt Roadshow <a href="#" style="color: var(--accent); font-family: 'JetBrains Mono'; font-size: 12px; text-decoration: none;">REQUEST MEETING →</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bento-card col-12" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 24px 32px;">
+          <div>
+            <h3 style="margin: 0;">Downloads</h3>
+          </div>
+          <div style="display: flex; gap: 16px;">
+            <a href="#" class="btn-pill btn-ghost btn-pill-sm">Corporate Presentation</a>
+            <a href="#" class="btn-pill btn-ghost btn-pill-sm">Technical Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. CTA FINAL -->
+  <section class="section-100vh bg-deep" style="align-items: center; text-align: center;">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <h2 class="fade-up" style="font-size: clamp(48px, 6vw, 80px); margin-bottom: 24px;">Rise With Copper</h2>
+      <p class="fade-up delay-1" style="font-size: 24px; max-width: 600px; margin: 0 auto 48px;">
+        The copper deficit is coming. Mocoa is positioned to be a strategic answer to a structural supply gap.
+      </p>
+      <div class="hero-actions fade-up delay-2" style="justify-content: center; margin-bottom: 0;">
+        <a href="#" class="btn-pill btn-accent">VIEW INVESTOR DECK</a>
+        <a href="#" class="btn-pill btn-ghost">CONTACT IR</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <img src="../assets/logo-cgnt.webp" alt="Logo" style="height: 24px; opacity: 0.8; filter: grayscale(100%);">
+            <span style="font-weight: 500; color: var(--text-secondary);">Copper Giant Resources Corp.</span>
+          </div>
+          <div class="tnum" style="color: var(--text-tertiary); font-size: 13px;">
+            TSXV: CGNT | OTC: LBCMF | FSE: 29H0
+          </div>
+        </div>
+        
+        <div class="footer-links tnum">
+          <a href="#">Privacy</a>
+          <a href="#">Disclaimer</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div>© 2026 Copper Giant Resources Corp.</div>
+        <div style="display: flex; gap: 16px;">
+          <a href="#" style="color: inherit; text-decoration: none;">Instagram</a>
+          <a href="#" style="color: inherit; text-decoration: none;">X</a>
+          <a href="#" style="color: inherit; text-decoration: none;">Facebook</a>
+          <a href="#" style="color: inherit; text-decoration: none;">LinkedIn</a>
+        </div>
+        <div style="color: var(--text-tertiary); opacity: 0.5;">Powered by Orbiton</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Slider Logic for Latest News
+    const slider = document.getElementById('newsSlider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    let currentIndex = 0;
+    
+    function updateSlider() {
+      if (!slider) return;
+      const cardWidth = slider.children[0].offsetWidth;
+      const gap = 12; // 12px gap
+      // Move by card width + gap
+      slider.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+    }
+
+    if (prevBtn && nextBtn && slider) {
+      const totalCards = slider.children.length;
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < totalCards - 1) {
+          currentIndex++;
+          updateSlider();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlider();
+        }
+      });
+
+      window.addEventListener('resize', updateSlider);
+    }
+  </script>
+</body>
+</html>

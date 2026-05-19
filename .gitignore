@@ -1,0 +1,12 @@
+.DS_Store
+**/.DS_Store
+.gemini
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea
+.vscode
+# Ignore the unused video file (15MB) to save repository space
+220175.mp4
+# Note: 11490-230853032.mp4 (30MB) is tracked because it is the active video background used in the mockup.

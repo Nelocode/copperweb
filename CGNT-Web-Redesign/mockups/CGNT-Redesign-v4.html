@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copper Giant Resources — Redesign Concept</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM: CGNT × Apple × Linear × Vercel
+       Accent: #FF002C (exact logo red)
+       Dark canvas with bento grids and cinematic pacing
+       ============================================================ */
+
+    /* --- Reset & Base --- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #08090a;
+      color: #f7f8f8;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- Colors --- */
+    :root {
+      --accent: #FF002C;
+      --accent-hover: #ff3355;
+      --accent-glow: rgba(255, 0, 44, 0.15);
+      --bg-deep: #010102;
+      --bg-canvas: #08090a;
+      --bg-panel: #0f1011;
+      --bg-surface: #191a1b;
+      --bg-elevated: #222326;
+      --text-primary: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --text-tertiary: #8a8f98;
+      --text-muted: #62666d;
+      --border-subtle: rgba(255,255,255,0.05);
+      --border-default: rgba(255,255,255,0.08);
+      --border-accent: rgba(255,0,44,0.25);
+      --nav-blur: rgba(8,9,10,0.85);
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 20px;
+      --radius-pill: 9999px;
+      --shadow-border: 0 0 0 1px var(--border-default);
+      --shadow-card: 0 0 0 1px var(--border-default), 0 2px 4px rgba(0,0,0,0.2);
+      --shadow-elevated: 0 0 0 1px var(--border-default), 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* ============================================================
+       GLASS NAVIGATION (Apple style)
+       ============================================================ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px;
+      background: var(--nav-blur);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center;
+      padding: 0 32px;
+    }
+    .nav-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; font-size: 16px; letter-spacing: -0.4px;
+      color: var(--text-primary);
+    }
+    .nav-logo-marks {
+      display: flex; align-items: center; gap: 2px;
+    }
+    .nav-logo-mark {
+      width: 8px; height: 8px; border-radius: 2px;
+      background: var(--accent);
+    }
+    .nav-logo-mark:nth-child(2) { background: var(--text-primary); width: 16px; }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: -0.13px;
+      color: var(--text-tertiary);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      background: var(--accent);
+      color: white !important;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-weight: 500 !important;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover) !important;
+      transform: scale(1.02);
+    }
+
+    /* ============================================================
+       HERO (Apple cinematic × dark)
+       ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 32px 80px;
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40%; right: -20%;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(255,0,44,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; bottom: -30%; left: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,0,44,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: inline-block;
+      padding: 4px 12px;
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-pill);
+      background: rgba(255,0,44,0.06);
+    }
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -2.4px;
+      color: var(--text-primary);
+      max-width: 900px;
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-tertiary);
+      max-width: 620px;
+      margin-bottom: 48px;
+    }
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 10px 28px;
+      border-radius: var(--radius-pill);
+      font-size: 15px; font-weight: 500;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 10px 28px;
+      border-radius: var(--radius-pill);
+      font-size: 15px; font-weight: 500;
+      border: 1px solid var(--border-default);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--text-secondary);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Hero Bento grid stats */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      margin-top: 80px;
+      background: var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .hero-stat {
+      background: var(--bg-canvas);
+      padding: 32px 24px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .hero-stat:hover { background: var(--bg-panel); }
+    .hero-stat-value {
+      font-size: 32px; font-weight: 600;
+      letter-spacing: -1px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-feature-settings: 'tnum';
+    }
+    .hero-stat-value .accent { color: var(--accent); }
+    .hero-stat-label {
+      font-size: 13px; font-weight: 400;
+      color: var(--text-tertiary);
+      font-feature-settings: 'tnum';
+    }
+
+    /* ============================================================
+       SECTION BASE
+       ============================================================ */
+    .section {
+      padding: 120px 32px;
+      position: relative;
+    }
+    .section-dark { background: var(--bg-deep); }
+    .section-canvas { background: var(--bg-canvas); }
+    .section-panel { background: var(--bg-panel); }
+    .section-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -1.6px;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      max-width: 800px;
+    }
+    .section-desc {
+      font-size: 17px; font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-tertiary);
+      max-width: 600px;
+      margin-bottom: 64px;
+    }
+
+    /* ============================================================
+       BENTO GRID (Apple × Linear)
+       ============================================================ */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .bento-item {
+      background: var(--bg-panel);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      border: 1px solid var(--border-subtle);
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .bento-item:hover {
+      border-color: var(--border-default);
+      background: var(--bg-surface);
+    }
+    .bento-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .bento-item:hover::before { opacity: 1; }
+
+    /* Bento spans */
+    .col-12 { grid-column: span 12; }
+    .col-8  { grid-column: span 8; }
+    .col-7  { grid-column: span 7; }
+    .col-6  { grid-column: span 6; }
+    .col-5  { grid-column: span 5; }
+    .col-4  { grid-column: span 4; }
+    .col-3  { grid-column: span 3; }
+
+    .bento-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,0,44,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+    .bento h3 {
+      font-size: 20px; font-weight: 600;
+      letter-spacing: -0.4px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .bento p {
+      font-size: 14px; font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-tertiary);
+    }
+    .bento-stat {
+      font-size: 44px; font-weight: 600;
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-feature-settings: 'tnum';
+    }
+    .bento-stat .accent { color: var(--accent); }
+    .bento-stat-label {
+      font-size: 13px; font-weight: 400;
+      color: var(--text-tertiary);
+      font-feature-settings: 'tnum';
+    }
+
+    /* ============================================================
+       THESIS / MARKET SECTION
+       ============================================================ */
+    .thesis {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 60px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .thesis::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(255,0,44,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .thesis blockquote {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 1;
+    }
+    .thesis blockquote strong { color: var(--accent); font-weight: 600; }
+    .thesis-attribution {
+      margin-top: 24px;
+      font-size: 13px; font-weight: 400;
+      color: var(--text-muted);
+      font-feature-settings: 'tnum';
+    }
+
+    /* ============================================================
+       INVESTORS / METRICS
+       ============================================================ */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .metric-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition: border-color 0.3s;
+    }
+    .metric-card:hover { border-color: var(--border-accent); }
+    .metric-card-value {
+      font-size: 36px; font-weight: 600;
+      letter-spacing: -1px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      font-feature-settings: 'tnum';
+    }
+    .metric-card-value .accent { color: var(--accent); }
+    .metric-card-label {
+      font-size: 14px; font-weight: 400;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       DRILLING TIMELINE (bento)
+       ============================================================ */
+    .timeline-bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .timeline-bento .bento-item {
+      padding: 32px 28px;
+    }
+    .timeline-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .timeline-count {
+      font-size: 40px; font-weight: 600;
+      letter-spacing: -1.2px;
+      color: var(--text-primary);
+      font-feature-settings: 'tnum';
+    }
+    .timeline-detail {
+      font-size: 14px; font-weight: 400;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       CTA SECTION
+       ============================================================ */
+    .cta-section {
+      text-align: center;
+      padding: 120px 32px 100px;
+      background: var(--bg-deep);
+      position: relative;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse, rgba(255,0,44,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 17px; font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-tertiary);
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+    .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ============================================================
+       FOOTER (Linear minimal)
+       ============================================================ */
+    .footer {
+      padding: 48px 32px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-canvas);
+    }
+    .footer-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500;
+      color: var(--text-tertiary);
+    }
+    .footer-logo .mark {
+      width: 6px; height: 6px; border-radius: 1px;
+      background: var(--accent);
+    }
+    .footer-links {
+      display: flex; gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px; font-weight: 400;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy {
+      font-size: 12px; font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate { animation: fadeUp 0.8s ease-out both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .bento { gap: 10px; }
+      .col-8, .col-7, .col-6, .col-5, .col-4, .col-3 { grid-column: span 12; }
+      .timeline-bento { gap: 10px; }
+      .timeline-bento .bento-item { grid-column: span 12; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 80px 20px; }
+      .bento-item { padding: 28px 24px; }
+      .thesis { padding: 40px 28px; }
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .hero-stat { padding: 24px 16px; }
+      .hero-stat-value { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="nav-logo-marks">
+          <span class="nav-logo-mark"></span>
+          <span class="nav-logo-mark"></span>
+          <span class="nav-logo-mark"></span>
+        </span>
+        <span>COPPER GIANT</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Mocoa</a></li>
+        <li><a href="#">Investors</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#" class="nav-cta">Rise With Copper</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <span class="hero-label animate">The Next Great Copper Mine</span>
+      <h1 class="animate delay-1">The Billion<br>Tonne <em>Mocoa</em><br>Deposit</h1>
+      <p class="hero-sub animate delay-2">
+        Colombia's world-class copper-molybdenum porphyry system — 
+        1.1 billion tonnes of resource, near surface, 
+        in one of the world's most strategic mining jurisdictions.
+      </p>
+      <div class="hero-actions animate delay-3">
+        <button class="btn-primary">Explore Mocoa</button>
+        <button class="btn-ghost">Investor Deck →</button>
+      </div>
+
+      <!-- Bento Stats Bar -->
+      <div class="hero-stats animate delay-4">
+        <div class="hero-stat">
+          <div class="hero-stat-value">1.1<span class="accent">B</span></div>
+          <div class="hero-stat-label">Tonne Resource</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">7.6<span class="accent">B</span></div>
+          <div class="hero-stat-label">lbs Copper</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">1<span class="accent">B</span></div>
+          <div class="hero-stat-label">lbs Molybdenum</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">C$<span class="accent">23</span>M</div>
+          <div class="hero-stat-label">Cash Position</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value"><span class="accent">54</span></div>
+          <div class="hero-stat-label">Drill Holes</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">37<span class="accent">K</span>m</div>
+          <div class="hero-stat-label">Drilled</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== THESIS ====== -->
+  <section class="section section-canvas">
+    <div class="section-inner">
+      <div class="thesis animate">
+        <blockquote>
+          Copper fundamentals are tightening. Rebounding Chinese demand, 
+          sulfuric acid constraints squeezing production capacity globally, 
+          and a structural supply gap widening every quarter.<br><br>
+          <strong>Copper Giant Resources Corp.</strong> holds 100% of Mocoa. 
+          Billion tonne club near surface. Scale matters in this market.
+        </blockquote>
+        <div class="thesis-attribution">
+          — Ian Harris, CEO · Copper Giant Resources Corp.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MOCA BENTO ====== -->
+  <section class="section section-dark">
+    <div class="section-inner">
+      <span class="section-label animate">Mocoa Project</span>
+      <h2 class="animate delay-1">The Geology of<br>a World-Class Asset</h2>
+      <p class="section-desc animate delay-2">
+        Located in Putumayo, Colombia, Mocoa is one of the largest 
+        undeveloped copper-molybdenum porphyry systems globally.
+      </p>
+
+      <div class="bento">
+        <div class="bento-item col-4 animate delay-2">
+          <div class="bento-icon">⛰</div>
+          <h3>Porphyry System</h3>
+          <p>Classic porphyry copper-molybdenum deposit with near-surface mineralisation. Bulk tonnage potential at low strip ratio.</p>
+        </div>
+        <div class="bento-item col-4 animate delay-3">
+          <div class="bento-icon">🌎</div>
+          <h3>Colombia</h3>
+          <p>Strategic jurisdiction with improving regulatory framework. Established mining culture and infrastructure corridor access.</p>
+        </div>
+        <div class="bento-item col-4 animate delay-4">
+          <div class="bento-icon">◆</div>
+          <h3>100% Ownership</h3>
+          <p>Copper Giant holds the entire Mocoa system. No JV partners, no royalties. Full control over development timeline.</p>
+        </div>
+        <div class="bento-item col-6 animate delay-2">
+          <div class="bento-stat">1.1<span class="accent">B</span></div>
+          <div class="bento-stat-label">Total Resource Tonnes</div>
+          <p style="margin-top:12px;">Indicated + Inferred resource across multiple mineralised zones. Open at depth and along strike.</p>
+        </div>
+        <div class="bento-item col-6 animate delay-3">
+          <div class="bento-stat"><span class="accent">0.45</span>%</div>
+          <div class="bento-stat-label">CuEq Grade</div>
+          <p style="margin-top:12px;">Combined copper equivalent grade including molybdenum credits. Competitive with global peers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DRILLING TIMELINE ====== -->
+  <section class="section section-panel">
+    <div class="section-inner">
+      <span class="section-label animate">Drilling Program</span>
+      <h2 class="animate delay-1">37,000 Metres &amp; Counting</h2>
+      <p class="section-desc animate delay-2">
+        54 drill holes completed. 23,000 metres of additional drilling 
+        planned for 2026 to extend resource and upgrade confidence.
+      </p>
+
+      <div class="timeline-bento">
+        <div class="bento-item col-4 animate delay-2">
+          <div class="timeline-year">Completed</div>
+          <div class="timeline-count"><span class="accent">54</span></div>
+          <div class="timeline-detail">Drill holes completed across the Mocoa system</div>
+        </div>
+        <div class="bento-item col-4 animate delay-3">
+          <div class="timeline-year">Total Metres</div>
+          <div class="timeline-count">37<span class="accent">K</span></div>
+          <div class="timeline-detail">Metres drilled — building the geological model</div>
+        </div>
+        <div class="bento-item col-4 animate delay-4">
+          <div class="timeline-year">2026 Plan</div>
+          <div class="timeline-count">23<span class="accent">K</span></div>
+          <div class="timeline-detail">Metres planned to expand and infill resource</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== INVESTORS ====== -->
+  <section class="section section-dark">
+    <div class="section-inner">
+      <span class="section-label animate">Investor Highlights</span>
+      <h2 class="animate delay-1">Financial Strength<br>&amp; Strategic Position</h2>
+      <p class="section-desc animate delay-2">
+        Strong balance sheet, aligned management team, 
+        and a singular focus on advancing Mocoa toward production.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card animate delay-2">
+          <div class="metric-card-value">C$<span class="accent">23</span>M</div>
+          <div class="metric-card-label">Cash &amp; equivalents. Fully funded for planned 2026 drilling program.</div>
+        </div>
+        <div class="metric-card animate delay-3">
+          <div class="metric-card-value"><span class="accent">0</span></div>
+          <div class="metric-card-label">Debt. Clean balance sheet with zero long-term debt.</div>
+        </div>
+        <div class="metric-card animate delay-4">
+          <div class="metric-card-value"><span class="accent">100</span>%</div>
+          <div class="metric-card-label">Ownership of Mocoa. No dilution from JV partners or royalties.</div>
+        </div>
+        <div class="metric-card animate delay-5">
+          <div class="metric-card-value">TSX<span class="accent">V</span></div>
+          <div class="metric-card-label">Listed on TSX Venture Exchange. Symbol: CGNT</div>
+        </div>
+        <div class="metric-card animate delay-2">
+          <div class="metric-card-value"><span class="accent">54</span></div>
+          <div class="metric-card-label">Drill holes completed. Extensive data set for geological modelling.</div>
+        </div>
+        <div class="metric-card animate delay-3">
+          <div class="metric-card-value">23<span class="accent">K</span>m</div>
+          <div class="metric-card-label">Drilling planned for 2026. Resource expansion and infill program.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="cta-section">
+    <h2 class="animate">Rise With Copper</h2>
+    <p class="animate delay-1">
+      The copper deficit is coming. Mocoa is positioned to be 
+      a strategic answer to a structural supply gap.
+    </p>
+    <div class="cta-actions animate delay-2">
+      <button class="btn-primary">View Investor Deck</button>
+      <button class="btn-ghost">Contact IR →</button>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="mark"></span>
+        Copper Giant Resources Corp.
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">TSXV: CGNT</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="footer-copy">
+        © 2026 Copper Giant Resources Corp.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
