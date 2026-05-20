@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper Giant | Investors</title>
+    
+    <!-- Apple-Grade Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-icon.png">
+    <link rel="stylesheet" href="style.css?v=2.1">
+</head>
+<body>
+
+    <!-- Ticker Bar -->
+    <div class="ticker-bar">
+        <span><strong>TSXV</strong>:CGNT C$0.64</span>
+        <span><strong>OTC</strong>:LBCMF $0.48</span>
+        <span><strong>FSE</strong>:29H0 €0.41</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="nav-header">
+        <nav class="main-nav">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant">
+            </a>
+            <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="mocoa.html">Mocoa Project</a>
+                <a href="corporate.html">Corporate</a>
+                <a href="investors.html" class="active">Investors</a>
+                <a href="news.html">News</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <h2>Investors</h2>
+        <div class="sub-nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#financial-position">Financial Position</a>
+            <a href="#exploration-plan">2026 Plan</a>
+            <a href="#presentation">Downloads</a>
+            <a href="#stock-information">Stock Chart</a>
+            <a href="#structure">Capital Structure</a>
+            <a href="#events">Events</a>
+            <a href="#agm">AGM Documents</a>
+            <a href="#" class="trigger-updates-modal btn-copper" style="padding: 6px 12px; font-size: 0.8rem; margin-left: 10px;">Get Updates</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="hero-overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%);"></div>
+        
+        <div class="hero-content fade-up">
+            <div class="text-eyebrow" style="margin-bottom: 20px;">Financial Profile · TSXV: CGNT</div>
+            <h1 class="text-display-giant">Value &<br>Exposure</h1>
+            <p class="hero-subtitle">A premier mining investment opportunity offering exposure to a Tier-1 copper-molybdenum porphyry deposit, backed by a world-class management team with a proven track record of discovery.</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat-item">
+                    <div class="hero-stat-val">208.7M</div>
+                    <div class="hero-stat-label">Common Shares Outstanding</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-val">C$133.6M</div>
+                    <div class="hero-stat-label">Market Capitalization</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-val">C$23.0M</div>
+                    <div class="hero-stat-label">Cash Position (C$)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Position & Exploration Plan -->
+    <section class="py-16 md:py-24" id="financial-position" style="border-top: 1px solid var(--border-glass);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="scroll-mt-28">
+                <div class="text-eyebrow">Financial Summary</div>
+                <h2 class="text-3xl font-bold text-white mb-6">Financial Position</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+                    <div class="bg-giant-slate p-8 border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                        <p class="text-white/50 text-sm uppercase tracking-wider mb-2">Cash on Hand</p>
+                        <p class="text-4xl font-bold text-copper-500">C$23M</p>
+                    </div>
+                    <div class="bg-giant-slate p-8 border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                        <p class="text-white/50 text-sm uppercase tracking-wider mb-2">Funding</p>
+                        <p class="text-4xl font-bold text-white">Fully Funded Exploration Program</p>
+                    </div>
+                </div>
+
+                <div id="exploration-plan" class="scroll-mt-28 mt-16">
+                    <div class="text-eyebrow">Exploration Strategy</div>
+                    <h2 class="text-3xl font-bold text-white mb-6">2026 Exploration Plan</h2>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-giant-slate p-6 text-center border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                            <p class="text-3xl font-bold text-copper-500">23,000m</p>
+                            <p class="text-white/60 text-sm mt-2">Planned Drilling</p>
+                            <p class="text-white/40 text-xs mt-1">+80% vs. previous campaign</p>
+                        </div>
+                        <div class="bg-giant-slate p-6 text-center border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                            <p class="text-3xl font-bold text-copper-500">30–50%</p>
+                            <p class="text-white/60 text-sm mt-2">Potential Resource Conversion</p>
+                        </div>
+                        <div class="bg-giant-slate p-6 text-center border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                            <p class="text-3xl font-bold text-copper-500">District</p>
+                            <p class="text-white/60 text-sm mt-2">Testing New Targets</p>
+                        </div>
+                        <div class="bg-giant-slate p-6 text-center border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                            <p class="text-3xl font-bold text-copper-500">PEA</p>
+                            <p class="text-white/60 text-sm mt-2">Preliminary Economic Assessment (H2 2026)</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-white/40 text-xs leading-relaxed mb-12">
+                        Key milestones ahead include expansion drilling, district target testing, the Mocoa Preliminary Economic Assessment (PEA), and the Colombian presidential elections (August 2026).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investor Downloads -->
+    <section class="py-16 md:py-24" id="presentation" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-eyebrow">Investor Tools</div>
+            <h2 class="text-3xl font-bold text-white mb-6">Investor Downloads</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Corporate Presentation -->
+                <a href="https://www.coppergiant.co/documents/CGNT-Corporate-Presentation-MAY-2026.pdf" target="_blank" class="p-6 bg-giant-slate hover:bg-giant-gray transition-colors group flex items-start gap-4 border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <div class="w-14 h-14 bg-copper-500/20 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-presentation h-7 w-7 text-copper-500" aria-hidden="true">
+                            <path d="M2 3h20"></path>
+                            <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"></path>
+                            <path d="m7 21 5-5 5 5"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-white font-medium group-hover:text-copper-500 transition-colors">Corporate Presentation - May 2026</h3>
+                        <p class="mt-1 text-sm text-white/50">Latest slide deck with corporate and project updates</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5 text-white/30 group-hover:text-copper-500 transition-colors flex-shrink-0" aria-hidden="true">
+                        <path d="M12 15V3"></path>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                    </svg>
+                </a>
+                
+                <!-- Technical Report -->
+                <a href="https://www.coppergiant.co/documents/Technical-Report-43-101.pdf" target="_blank" class="p-6 bg-giant-slate hover:bg-giant-gray transition-colors group flex items-start gap-4 border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <div class="w-14 h-14 bg-copper-500/20 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-spreadsheet h-7 w-7 text-copper-500" aria-hidden="true">
+                            <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
+                            <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                            <path d="M8 13h2"></path>
+                            <path d="M14 13h2"></path>
+                            <path d="M8 17h2"></path>
+                            <path d="M14 17h2"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-white font-medium group-hover:text-copper-500 transition-colors">Technical Report - Mocoa Project</h3>
+                        <p class="mt-1 text-sm text-white/50">Independent NI 43-101 Technical Report</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5 text-white/30 group-hover:text-copper-500 transition-colors flex-shrink-0" aria-hidden="true">
+                        <path d="M12 15V3"></path>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stock Information & TradingView Advanced Chart -->
+    <section class="py-16 md:py-24" id="stock-information">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-eyebrow">Financial Markets</div>
+            <h2 class="text-3xl font-bold text-white mb-6">Stock Information</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <a href="https://www.tradingview.com/symbols/TSXV-CGNT/" target="_blank" rel="noopener noreferrer" class="p-8 bg-giant-slate hover:bg-giant-gray transition-colors group text-center border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up h-10 w-10 text-copper-500 mx-auto mb-4" aria-hidden="true">
+                        <path d="M16 7h6v6"></path>
+                        <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                    <p class="text-white/50 text-sm mb-2">TSX Venture Exchange</p>
+                    <p class="text-3xl font-bold text-white group-hover:text-copper-500 transition-colors">CGNT</p>
+                    <div class="mt-4 flex items-center justify-center gap-1 text-copper-500 text-sm">View Chart <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-4 w-4" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></div>
+                </a>
+                <a href="https://www.tradingview.com/symbols/OTC-LBCMF/" target="_blank" rel="noopener noreferrer" class="p-8 bg-giant-slate hover:bg-giant-gray transition-colors group text-center border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up h-10 w-10 text-copper-500 mx-auto mb-4" aria-hidden="true">
+                        <path d="M16 7h6v6"></path>
+                        <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                    <p class="text-white/50 text-sm mb-2">OTCQB</p>
+                    <p class="text-3xl font-bold text-white group-hover:text-copper-500 transition-colors">LBCMF</p>
+                    <div class="mt-4 flex items-center justify-center gap-1 text-copper-500 text-sm">View Chart <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-4 w-4" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></div>
+                </a>
+                <a href="https://www.tradingview.com/symbols/FWB-29H0/" target="_blank" rel="noopener noreferrer" class="p-8 bg-giant-slate hover:bg-giant-gray transition-colors group text-center border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up h-10 w-10 text-copper-500 mx-auto mb-4" aria-hidden="true">
+                        <path d="M16 7h6v6"></path>
+                        <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                    </svg>
+                    <p class="text-white/50 text-sm mb-2">Frankfurt Stock Exchange</p>
+                    <p class="text-3xl font-bold text-white group-hover:text-copper-500 transition-colors">29H0</p>
+                    <div class="mt-4 flex items-center justify-center gap-1 text-copper-500 text-sm">View Chart <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-4 w-4" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></div>
+                </a>
+            </div>
+            
+            <div class="bg-giant-slate p-8 border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                <h3 class="text-2xl font-bold text-white mb-6">Interactive Stock Chart</h3>
+                <div>
+                    <div class="flex gap-2 mb-4">
+                        <button id="btn-chart-tsxv" class="px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-colors bg-copper-500 text-white border-none cursor-pointer" style="border-radius: 4px;">TSXV: CGNT</button>
+                        <button id="btn-chart-otc" class="px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-colors bg-white/10 text-white/60 hover:bg-white/20 hover:text-white border-none cursor-pointer" style="border-radius: 4px;">OTC: LBCMF</button>
+                    </div>
+                    
+                    <div class="tradingview-widget-container" style="height: 600px; width: 100%;">
+                        <div id="tradingview_advanced_chart" style="height: 100%; width: 100%;"></div>
+                    </div>
+                    
+                    <div class="mt-3 text-right">
+                        <a href="https://www.tradingview.com/symbols/TSXV-CGNT/" target="_blank" rel="noopener noreferrer" class="text-xs text-white/40 hover:text-copper-500 transition-colors">Chart by TradingView</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Structure -->
+    <section class="py-16 md:py-24" id="structure" style="border-top: 1px solid var(--border-glass);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-eyebrow">Capital Structure</div>
+            <h2 class="text-3xl font-bold text-white mb-6">Share Structure</h2>
+            
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start;" class="photo-bento">
+                <!-- Capitalization Table -->
+                <div class="bg-giant-slate p-8 border border-white/5 rounded-lg" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 30px; font-weight: 700; color: white;">Capitalization Metrics</h3>
+                    <p class="text-white/40 text-sm mb-6">As of May 1, 2026</p>
+                    
+                    <div class="drill-table" style="margin-top: 0;">
+                        <div class="drill-row">
+                            <div class="drill-id">Common Shares</div>
+                            <div class="drill-result" style="text-align: right; font-weight: 700; color: white;">208,764,198</div>
+                        </div>
+                        <div class="drill-row">
+                            <div class="drill-id">Warrants</div>
+                            <div class="drill-result" style="text-align: right; font-weight: 700; color: white;">91,658,223</div>
+                        </div>
+                        <div class="drill-row">
+                            <div class="drill-id">Options</div>
+                            <div class="drill-result" style="text-align: right; font-weight: 700; color: white;">18,460,000</div>
+                        </div>
+                        <div class="drill-row" style="border-bottom: none;">
+                            <div class="drill-id">Total Fully Diluted</div>
+                            <div class="drill-result" style="text-align: right; font-weight: 700; color: var(--copper-primary);">318,882,421</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pie Chart (SVG) -->
+                <div class="bg-giant-slate p-8 border border-white/5 rounded-lg flex flex-col items-center" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <h3 class="text-xl font-bold text-white mb-6 text-center">Fully Diluted Distribution</h3>
+                    
+                    <div class="relative mb-6">
+                        <svg width="240" height="240" viewBox="0 0 300 300" class="drop-shadow-lg">
+                            <path d="M 150 150 L 50.88847445157626 217.65283071286927 A 120 120 0 1 0 150 30 Z" fill="var(--copper-primary)" stroke="#1a1a1a" stroke-width="2"></path>
+                            <path d="M 150 150 L 107.30830456265366 37.850906643500394 A 120 120 0 0 0 50.88847445157626 217.65283071286927 Z" fill="rgba(184, 115, 51, 0.6)" stroke="#1a1a1a" stroke-width="2"></path>
+                            <path d="M 150 150 L 149.99999999999997 30 A 120 120 0 0 0 107.30830456265366 37.850906643500394 Z" fill="rgba(184, 115, 51, 0.3)" stroke="#1a1a1a" stroke-width="2"></path>
+                            <circle cx="150" cy="150" r="55" fill="#0a0a0a"></circle>
+                            <text x="150" y="142" text-anchor="middle" fill="white" font-size="11" font-weight="500" class="select-none pointer-events-none">Fully Diluted</text>
+                            <text x="150" y="162" text-anchor="middle" fill="white" font-size="13" font-weight="700" class="select-none pointer-events-none">318.9M</text>
+                        </svg>
+                    </div>
+                    
+                    <div class="w-full space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-sm" style="background-color: var(--copper-primary);"></span>
+                                <span class="text-white/70">Common Shares</span>
+                            </div>
+                            <span class="text-white font-medium">208,764,198 (65.5%)</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-sm" style="background-color: rgba(184, 115, 51, 0.6);"></span>
+                                <span class="text-white/70">Warrants</span>
+                            </div>
+                            <span class="text-white font-medium">91,658,223 (28.7%)</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-sm" style="background-color: rgba(184, 115, 51, 0.3);"></span>
+                                <span class="text-white/70">Options</span>
+                            </div>
+                            <span class="text-white font-medium">18,460,000 (5.8%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shareholder Distribution -->
+            <div class="bg-giant-slate p-8 border border-white/5 rounded-lg mt-8" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 20px; font-weight: 700; color: white;">Shareholder Distribution</h3>
+                
+                <div style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                            <span style="color: white; font-weight: 600;">Fiore Group / Frank Giustra</span>
+                            <span style="color: var(--copper-primary); font-weight: 700;">15%</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 15%; height: 100%; background: var(--copper-primary);"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                            <span style="color: white; font-weight: 600;">Institutional Investors</span>
+                            <span style="color: var(--copper-primary); font-weight: 700;">12%</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 12%; height: 100%; background: var(--copper-primary); opacity: 0.85;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                            <span style="color: white; font-weight: 600;">Management & Insiders</span>
+                            <span style="color: var(--copper-primary); font-weight: 700;">11%</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 11%; height: 100%; background: var(--copper-primary); opacity: 0.7;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                            <span style="color: white; font-weight: 600;">Public Float (Retail)</span>
+                            <span style="color: var(--copper-primary); font-weight: 700;">62%</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 62%; height: 100%; background: var(--copper-primary); opacity: 0.4;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-tertiary); font-size: 0.85rem; line-height: 1.5; margin: 0;">
+                    Strong alignment of management and institutional shareholders, representing 38% of total shares outstanding, ensures capital discipline and a shared focus on shareholder value.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events -->
+    <section class="py-16 md:py-24" id="events" style="border-top: 1px solid var(--border-glass);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-eyebrow">Corporate Calendar</div>
+            <h2 class="text-3xl font-bold text-white mb-6">Upcoming Events</h2>
+            
+            <div class="flex flex-wrap gap-3 mb-8">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="Conference">Conferences</button>
+                <button class="filter-btn" data-filter="Roadshow">Roadshows</button>
+            </div>
+
+            <div class="space-y-4" id="events-list">
+                <!-- SMI Panama -->
+                <div class="event-card" data-event-type="Conference">
+                    <div class="date-badge">
+                        <span class="date-badge-month">APR</span>
+                        <span class="date-badge-day">15</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Conference</span>
+                        <h4 class="text-xl font-bold text-white mb-2">SMI Panama</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                April 15 & 16, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Panama City, Panama
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+                
+                <!-- 121 London -->
+                <div class="event-card" data-event-type="Conference">
+                    <div class="date-badge">
+                        <span class="date-badge-month">MAY</span>
+                        <span class="date-badge-day">11</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Conference</span>
+                        <h4 class="text-xl font-bold text-white mb-2">121 London</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                May 11 & 12, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                London, UK
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+                
+                <!-- Berlin Roadshow -->
+                <div class="event-card" data-event-type="Roadshow">
+                    <div class="date-badge">
+                        <span class="date-badge-month">MAY</span>
+                        <span class="date-badge-day">22</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Roadshow</span>
+                        <h4 class="text-xl font-bold text-white mb-2">Berlin Roadshow</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                May 22, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Berlin, Germany
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+                
+                <!-- Frankfurt Roadshow -->
+                <div class="event-card" data-event-type="Roadshow">
+                    <div class="date-badge">
+                        <span class="date-badge-month">MAY</span>
+                        <span class="date-badge-day">26</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Roadshow</span>
+                        <h4 class="text-xl font-bold text-white mb-2">Frankfurt Roadshow</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                May 26, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Frankfurt, Germany
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+                
+                <!-- Zurich Roadshow -->
+                <div class="event-card" data-event-type="Roadshow">
+                    <div class="date-badge">
+                        <span class="date-badge-month">MAY</span>
+                        <span class="date-badge-day">27</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Roadshow</span>
+                        <h4 class="text-xl font-bold text-white mb-2">Zurich Roadshow</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                May 27, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Zurich, Switzerland
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+                
+                <!-- Atlantic One Financial -->
+                <div class="event-card" data-event-type="Conference">
+                    <div class="date-badge">
+                        <span class="date-badge-month">MAY</span>
+                        <span class="date-badge-day">27</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Conference</span>
+                        <h4 class="text-xl font-bold text-white mb-2">Atlantic One Financial</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                May 27–30, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Mallorca, Spain
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+                
+                <!-- Rule Symposium -->
+                <div class="event-card" data-event-type="Conference">
+                    <div class="date-badge">
+                        <span class="date-badge-month">JUL</span>
+                        <span class="date-badge-day">06</span>
+                    </div>
+                    <div class="event-details">
+                        <span class="event-type-pill">Conference</span>
+                        <h4 class="text-xl font-bold text-white mb-2">2026 Rule Resource Symposium</h4>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-copper-500" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                July 6–10, 2026
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin text-copper-500" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Boca Raton, Florida, USA
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn-outline trigger-updates-modal">Request Meeting</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGM Documents -->
+    <section class="py-16 md:py-24" id="agm" style="border-top: 1px solid var(--border-glass);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-6">Annual General Meeting (AGM) Documents</h2>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coppergiant.co/documents/CGNT-Notice-of-Meeting-2025.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-6 bg-giant-slate hover:bg-giant-gray transition-colors group border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <div class="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-6 w-6 text-copper-500" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                        <div>
+                            <h4 class="text-white font-medium group-hover:text-copper-500 transition-colors">Notice of Annual General Meeting</h4>
+                            <p class="text-sm text-white/50">Notice of 2025 AGM and proxy materials</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5 text-white/30 group-hover:text-copper-500 transition-colors" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                </a>
+                
+                <a href="https://www.coppergiant.co/documents/Information-Circular-Copper-Giant-AGM-Circular-NOTICE-COMBINED.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-6 bg-giant-slate hover:bg-giant-gray transition-colors group border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <div class="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-6 w-6 text-copper-500" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                        <div>
+                            <h4 class="text-white font-medium group-hover:text-copper-500 transition-colors">Management Information Circular</h4>
+                            <p class="text-sm text-white/50">Detailed information for shareholders</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5 text-white/30 group-hover:text-copper-500 transition-colors" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                </a>
+                
+                <a href="https://www.coppergiant.co/documents/Form-of-Proxy-CGNT-AGM-2025.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-6 bg-giant-slate hover:bg-giant-gray transition-colors group border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <div class="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-6 w-6 text-copper-500" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                        <div>
+                            <h4 class="text-white font-medium group-hover:text-copper-500 transition-colors">Form of Proxy</h4>
+                            <p class="text-sm text-white/50">Proxy vote delegation form for the 2025 AGM</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5 text-white/30 group-hover:text-copper-500 transition-colors" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                </a>
+                
+                <a href="https://www.coppergiant.co/documents/NI-MAIL-CARD-2025-CG.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-6 bg-giant-slate hover:bg-giant-gray transition-colors group border border-white/5 rounded-lg text-decoration-none" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                    <div class="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-6 w-6 text-copper-500" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                        <div>
+                            <h4 class="text-white font-medium group-hover:text-copper-500 transition-colors">Voting Instruction Form Mail Card</h4>
+                            <p class="text-sm text-white/50">NI Card for non-registered shareholders</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5 text-white/30 group-hover:text-copper-500 transition-colors" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stay Informed Section -->
+    <section class="py-16 md:py-24" id="newsletter">
+        <div class="mx-auto max-w-md px-4 sm:px-6 lg:px-8">
+            <div class="bg-giant-slate p-8 border border-white/5 rounded-2xl text-center" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px);">
+                <div class="text-eyebrow justify-center mb-3">Investor Relations</div>
+                <h2 class="text-3xl font-bold text-white mb-2">Stay Informed</h2>
+                <p class="text-white/60 text-sm mb-8">
+                    Subscribe to our corporate mailing list to receive press releases, drilling results, and corporate newsletters directly in your inbox.
+                </p>
+                
+                <form class="newsletter-form text-left" onsubmit="event.preventDefault(); showModalSuccess();">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="first-name" class="form-label">FIRST NAME</label>
+                            <input type="text" id="first-name" class="form-input" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name" class="form-label">LAST NAME</label>
+                            <input type="text" id="last-name" class="form-input" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">EMAIL ADDRESS</label>
+                        <input type="email" id="email" class="form-input" placeholder="john.doe@company.com" required>
+                    </div>
+    
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" id="consent" class="form-checkbox" required>
+                        <label for="consent" class="form-checkbox-label">
+                            I consent to receive electronic communications from Copper Giant. I understand that I can unsubscribe at any time.
+                        </label>
+                    </div>
+    
+                    <button type="submit" class="btn-copper form-submit-btn">
+                        Subscribe to Updates
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant Logo">
+            </div>
+            
+            <div class="footer-description">
+                <p>Copper Giant, part of the Fiore Group, is dedicated to responsibly advancing high-quality copper projects. Led by a team with extensive experience in major mine development, from discovery through construction, our current focus is the Mocoa copper-molybdenum porphyry system in southern Colombia, one of the largest undeveloped copper systems in the Americas. Grounded in our Good Neighbor Philosophy, we are committed to building long-term value for our communities while contributing to the global energy transition.</p>
+            </div>
+            
+            <div class="footer-address">
+                Suite 3123 – 595 Burrard Street, Vancouver, BC V7X 1J1, Canada
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © Copyright 2026 – Copper Giant. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="legal.html">Disclaimer</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="btn-back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <style>
+        input:focus {
+            border-color: var(--copper-primary) !important;
+        }
+        @media (max-width: 580px) {
+            .form-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        .btn-copper {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-copper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(184, 115, 51, 0.3);
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="script.js?v=2.2"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+        // TradingView advanced chart setup
+        function loadTradingViewChart(symbol) {
+            if (typeof TradingView !== 'undefined') {
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": symbol,
+                    "interval": "D",
+                    "timezone": "America/Toronto",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "enable_publishing": false,
+                    "hide_side_toolbar": false,
+                    "allow_symbol_change": false,
+                    "container_id": "tradingview_advanced_chart"
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTradingViewChart("TSXV:CGNT");
+
+            const btnTSXV = document.getElementById('btn-chart-tsxv');
+            const btnOTC = document.getElementById('btn-chart-otc');
+
+            if (btnTSXV && btnOTC) {
+                btnTSXV.addEventListener('click', () => {
+                    btnTSXV.className = "px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-colors bg-copper-500 text-white border-none cursor-pointer";
+                    btnOTC.className = "px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-colors bg-white/10 text-white/60 hover:bg-white/20 hover:text-white border-none cursor-pointer";
+                    btnTSXV.style.borderRadius = "4px";
+                    btnOTC.style.borderRadius = "4px";
+                    loadTradingViewChart("TSXV:CGNT");
+                });
+
+                btnOTC.addEventListener('click', () => {
+                    btnOTC.className = "px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-colors bg-copper-500 text-white border-none cursor-pointer";
+                    btnTSXV.className = "px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-colors bg-white/10 text-white/60 hover:bg-white/20 hover:text-white border-none cursor-pointer";
+                    btnTSXV.style.borderRadius = "4px";
+                    btnOTC.style.borderRadius = "4px";
+                    loadTradingViewChart("OTC:LBCMF");
+                });
+            }
+        });
+    </script>
+
+    <!-- Modal for updates -->
+    <div class="modal-overlay" id="updates-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="btn-close-modal" aria-label="Close modal">&times;</button>
+            
+            <!-- Form State -->
+            <div id="modal-form-state">
+                <div class="modal-header">
+                    <h3>Receive Updates</h3>
+                    <p>Subscribe to receive exploration discoveries, corporate news, and financial updates directly in your inbox.</p>
+                </div>
+                <form class="modal-form" id="newsletter-modal-form" onsubmit="event.preventDefault(); showModalSuccess();">
+                    <div class="input-group">
+                        <label for="modal-name">Full Name</label>
+                        <input type="text" id="modal-name" class="input-field" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="modal-email">Email Address</label>
+                        <input type="email" id="modal-email" class="input-field" placeholder="john.doe@company.com" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Press Releases
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Exploration Updates
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            Financial & Corporate Reports
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit-modal">Subscribe</button>
+                </form>
+            </div>
+            
+            <!-- Success State -->
+            <div class="modal-success-state" id="modal-success-state">
+                <div class="modal-success-icon">✓</div>
+                <h3>Subscription Confirmed</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-top: 10px;">Thank you for subscribing. You have been added to our corporate updates mailing list.</p>
+                <button class="btn-copper" style="margin-top: 25px; padding: 10px 24px; border-radius: 4px; border: none; cursor: pointer;" onclick="closeUpdatesModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

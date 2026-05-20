@@ -1,0 +1,1540 @@
+
+(function() {
+  const global = window;
+
+  if (global.__orbitonScriptLoaded) {
+    return;
+  }
+  global.__orbitonScriptLoaded = true;
+
+  const commandQueue = global.__orbitonQueue || [];
+  global.__orbitonQueue = commandQueue;
+
+  const registerPublicApi = (property, internalName) => {
+    const invoke = (...args) => {
+      const run = () => {
+        const fn = global[internalName];
+        if (typeof fn === "function") {
+          fn(...args);
+        } else {
+          console.warn(`Orbiton: internal method ${internalName} unavailable.`);
+        }
+      };
+
+      if (global.__orbitonReady) {
+        run();
+      } else {
+        commandQueue.push(run);
+      }
+    };
+
+    global.Orbiton = global.Orbiton || {};
+    if (!global.Orbiton[property]) {
+      global.Orbiton[property] = invoke;
+    }
+  };
+
+  registerPublicApi("show", "__orbitonShow");
+  registerPublicApi("hide", "__orbitonHide");
+  registerPublicApi("showNewMessage", "__orbitonShowNewMessage");
+  registerPublicApi("update", "__orbitonUpdate");
+
+  const orbitonInit = () => {
+    let chatIframe = null;
+    let chatBtn = null;
+    let chatInputContainer = null;
+    let investBtn = null;
+    let investResizeHandler = null;
+    let hasExistingChats = false;
+    let previousUIState = null; // Track what was visible before opening modal
+    let expandBackdrop = null; // Backdrop for expanded mode
+    let iframeLoaded = false;
+    let loadingIndicator = null;
+
+    const hostId = "orbiton-embed-host";
+    let host = document.getElementById(hostId);
+    if (!host) {
+      host = document.createElement("div");
+      host.id = hostId;
+      host.style.all = "initial";
+      host.style.position = "fixed";
+      host.style.top = "0";
+      host.style.left = "0";
+      host.style.width = "0";
+      host.style.height = "0";
+      host.style.zIndex = "2147483647";
+      document.body.appendChild(host);
+    }
+
+    const shadowRoot = host.shadowRoot || host.attachShadow({ mode: "open" });
+    let shadowContainer = shadowRoot.querySelector("#orbiton-shadow-container");
+    if (!shadowContainer) {
+      shadowContainer = document.createElement("div");
+      shadowContainer.id = "orbiton-shadow-container";
+      shadowRoot.appendChild(shadowContainer);
+    }
+
+    const storage = (() => {
+      try {
+        const testKey = "__orbiton_storage_test__";
+        window.localStorage.setItem(testKey, "1");
+        window.localStorage.removeItem(testKey);
+        return window.localStorage;
+      } catch (error) {
+        console.warn("Orbiton chat embed: localStorage unavailable, using in-memory fallback.", error);
+        const memoryStore = new Map();
+        return {
+          getItem: (key) => (memoryStore.has(key) ? memoryStore.get(key) : null),
+          setItem: (key, value) => {
+            memoryStore.set(key, String(value));
+          },
+          removeItem: (key) => {
+            memoryStore.delete(key);
+          }
+        };
+      }
+    })();
+
+  function makeInteractive(element) {
+    if (!element) return;
+    element.setAttribute("data-orbiton-interactive", "true");
+  }
+
+  // Helper function to show iframe and sync state
+  function showIframe() {
+    if (chatIframe) {
+      // Ensure we're starting fresh - remove any leftover expanded state
+      chatIframe.classList.remove("expanded");
+      chatIframe.style.removeProperty('position');
+      chatIframe.style.removeProperty('top');
+      chatIframe.style.removeProperty('right');
+      chatIframe.style.removeProperty('bottom');
+      chatIframe.style.removeProperty('width');
+      chatIframe.style.removeProperty('height');
+      chatIframe.style.removeProperty('z-index');
+      
+      chatIframe.style.display = "block";
+      
+      if (!iframeLoaded) {
+        if (!loadingIndicator) {
+          loadingIndicator = document.createElement("div");
+          loadingIndicator.className = "orb-chat-loading";
+          loadingIndicator.innerHTML = '<div class="orb-chat-loading-spinner"></div>' +
+            '<span class="orb-chat-loading-text">Loading chat...</span>';
+          shadowContainer.appendChild(loadingIndicator);
+        }
+        loadingIndicator.style.display = "flex";
+        chatIframe.style.opacity = "0";
+      } else {
+        chatIframe.style.opacity = "1";
+        if (loadingIndicator) {
+          loadingIndicator.style.display = "none";
+        }
+      }
+      
+      // Hide backdrop if it exists
+      if (expandBackdrop) {
+        expandBackdrop.style.display = "none";
+      }
+      
+      // Always start in collapsed state
+      setTimeout(() => {
+        chatIframe.contentWindow.postMessage({ type: 'expandedStateChanged', isExpanded: false }, '*');
+      }, 100);
+    }
+  }
+
+  // Store identifier locally for profile tracking
+  const identifier = "null";
+  storage.setItem('profileIdentifier', identifier); // Store as profileIdentifier for chat page compatibility
+  
+  // Check if user has existing chats
+  async function checkExistingChats() {
+    // First check storage (localStorage/in-memory fallback) for recent chat activity
+    const hasExistingChatsKey = 'hasExistingChats'; // Separate key for boolean flag
+    const hasLocalChat = storage.getItem(hasExistingChatsKey) === 'true';
+    
+    if (hasLocalChat) {
+      return true;
+    }
+    
+    // Then check database
+    try {
+      const response = await fetch("https://chat.orbiton.app/api/userChats?identifier=" + identifier + "&companyId=2");
+      const data = await response.json();
+      const hasChats = data.chats && data.chats.length > 0;
+      
+      // If database has chats, update storage flag
+      if (hasChats) {
+        storage.setItem(hasExistingChatsKey, 'true'); // Use separate key for boolean flag
+      }
+      
+      return hasChats;
+    } catch (error) {
+      console.error("Error checking existing chats:", error);
+      return false;
+    }
+  }
+
+  function getChatButtonIcon(isOpen) {
+    // Show only icon on mobile, text + icon on desktop
+    const isMobile = window.innerWidth <= 600;
+    const label = isMobile ? '' : '<span class="orb-button-text">AI Chat</span>';
+    const svgOpen = '<svg class="orb-chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const svgClose = '<svg class="orb-chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:currentColor;stop-opacity:1" /><stop offset="100%" style="stop-color:currentColor;stop-opacity:0.8" /></linearGradient></defs><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM12 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM16 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="url(#grad1)"/><path d="M21 11.5C21 16.75 16.75 21 11.5 21c-1.8 0-3.5-.5-4.9-1.4L3 21l1.4-3.6C3.5 15.96 3 14.05 3 11.5 3 6.25 7.25 2 12.5 2h.5c4.75.25 8.5 4 8.75 8.75v.75z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return label + (isOpen ? svgOpen : svgClose);
+  }
+  
+  // UI helper functions
+  function showChatButton() {
+    // Ensure iframe exists (but we can keep it hidden)
+    if (!chatBtn) {
+      chatBtn = document.createElement("button");
+      chatBtn.className = "orb-chat-button";
+      chatBtn.innerHTML = getChatButtonIcon(false);
+      makeInteractive(chatBtn);
+      chatBtn.addEventListener("click", () => {
+        ensureChatIframe();
+        const hidden = chatIframe.style.display === "none" || chatIframe.style.display === "";
+        if (hidden) {
+          showIframe();
+        } else {
+          chatIframe.style.display = "none";
+          if (loadingIndicator) {
+            loadingIndicator.style.display = "none";
+          }
+          storage.setItem('orbiton_chat_dismissed', 'true');
+        }
+        chatBtn.innerHTML = getChatButtonIcon(hidden);
+        adjustInvestButtonPosition();
+      });
+      shadowContainer.appendChild(chatBtn);
+    }
+    chatBtn.style.display = "inline-flex";
+
+    if (chatInputContainer) {
+      chatInputContainer.remove();
+      chatInputContainer = null;
+    }
+    adjustInvestButtonPosition();
+  }
+
+  function showChatInput() {
+    if (!chatInputContainer) {
+      chatInputContainer = createChatInput();
+      shadowContainer.appendChild(chatInputContainer);
+    }
+    if (chatBtn) chatBtn.style.display = "none";
+    if (chatIframe) chatIframe.style.display = "none";
+    if (loadingIndicator) {
+      loadingIndicator.style.display = "none";
+    }
+    chatInputContainer.style.display = "flex";
+    adjustInvestButtonPosition();
+  }
+  
+  function createChatInput() {
+    const container = document.createElement("div");
+    container.className = "orb-chat-input-container";
+    makeInteractive(container);
+    
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Ask about Copper Giant";
+    input.className = "orb-chat-input";
+    
+    const sendBtn = document.createElement("button");
+    sendBtn.className = "orb-chat-send-btn";
+    sendBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+    
+    const handleSubmit = () => {
+      const question = input.value.trim();
+      if (question) {
+        openChatWithQuestion(question);
+      }
+    };
+    
+    sendBtn.addEventListener("click", handleSubmit);
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        handleSubmit();
+      }
+    });
+    
+    container.appendChild(input);
+    container.appendChild(sendBtn);
+    
+    return container;
+  }
+
+  function ensureChatIframe() {
+    if (!chatIframe) {
+      chatIframe = document.createElement("iframe");
+      chatIframe.src = "https://chat.orbiton.app/lbcmf/chat?identifier=" + identifier;
+      chatIframe.className = "orb-chat-iframe";
+      chatIframe.allow = "microphone";
+      makeInteractive(chatIframe);
+      shadowContainer.appendChild(chatIframe);
+      chatIframe.style.opacity = "0";
+      iframeLoaded = false;
+      chatIframe.addEventListener("load", () => {
+        // Add a minimum 300ms delay so users always see the loading indicator
+        setTimeout(() => {
+          iframeLoaded = true;
+          chatIframe.style.opacity = "1";
+          if (loadingIndicator) {
+            loadingIndicator.style.display = "none";
+          }
+        }, 300);
+      }, { once: true });
+    }
+    return chatIframe;
+  }
+
+  function openChatWithQuestion(question) {
+    // Remove input container permanently
+    if (chatInputContainer) {
+      chatInputContainer.remove();
+      chatInputContainer = null;
+    }
+    
+    if (chatIframe) {
+      chatIframe.remove();
+      chatIframe = null;
+    }
+    if (loadingIndicator) {
+      loadingIndicator.style.display = "none";
+    }
+    
+    chatIframe = null;
+    ensureChatIframe();
+    showIframe();
+    
+    // Call showChatButton after chat is initially open
+    showChatButton();
+    chatBtn.innerHTML = getChatButtonIcon(true);
+    
+    // Update hasExistingChats flag in storage
+    hasExistingChats = true;
+    const hasExistingChatsKey = 'hasExistingChats'; // Use separate key for boolean flag
+    storage.setItem(hasExistingChatsKey, 'true');
+    
+    // Send the question after chat is ready
+    window.addEventListener("message", function handshake(e) {
+      if (e.source === chatIframe.contentWindow && e.data?.type === "chatReady") {
+        chatIframe.contentWindow.postMessage(
+          { type: "fillInput", question: question, newChat: true },
+          "*"
+        );
+        window.removeEventListener("message", handshake);
+      }
+    });
+  }
+
+  window.__orbitonShow = () => {
+    ensureChatIframe();
+    showIframe();
+    if (chatInputContainer) {
+      chatInputContainer.style.display = "none";
+    }
+    if (chatBtn) {
+      chatBtn.innerHTML = getChatButtonIcon(true);
+    }
+    hasExistingChats = true;
+    storage.setItem('hasExistingChats', 'true');
+  };
+
+  window.__orbitonHide = () => {
+    if (chatIframe) {
+      chatIframe.style.display = "none";
+      chatIframe.classList.remove("fullscreen");
+      chatIframe.classList.remove("expanded");
+      if (!iframeLoaded) {
+        chatIframe.style.opacity = "0";
+      }
+    }
+    if (chatBtn) {
+      chatBtn.innerHTML = getChatButtonIcon(false);
+    }
+    if (expandBackdrop) {
+      expandBackdrop.style.display = "none";
+    }
+    if (loadingIndicator) {
+      loadingIndicator.style.display = "none";
+    }
+    adjustInvestButtonPosition();
+  };
+
+  window.__orbitonShowNewMessage = (message) => {
+    if (!message) {
+      window.__orbitonShow();
+      return;
+    }
+    openChatWithQuestion(String(message));
+  };
+
+  window.__orbitonUpdate = () => {};
+
+  window.addEventListener("message", (e) => {
+    if (e.data?.type === "chatReady" && chatIframe && e.source === chatIframe.contentWindow) {
+      // Always send current expanded state when iframe is ready
+      const isCurrentlyExpanded = chatIframe.classList.contains("expanded");
+      chatIframe.contentWindow.postMessage({ type: 'expandedStateChanged', isExpanded: isCurrentlyExpanded }, '*');
+    } else if (e.data?.type === "closeChat") {
+      // Remember that the user explicitly dismissed the chat
+      storage.setItem('orbiton_chat_dismissed', 'true');
+
+      if (chatIframe) {
+        chatIframe.style.display = "none";
+        chatIframe.classList.remove("fullscreen");
+        chatIframe.classList.remove("expanded");
+        
+        // Remove all inline styles to ensure proper reset
+        chatIframe.style.removeProperty('position');
+        chatIframe.style.removeProperty('top');
+        chatIframe.style.removeProperty('right');
+        chatIframe.style.removeProperty('bottom');
+        chatIframe.style.removeProperty('width');
+        chatIframe.style.removeProperty('height');
+        chatIframe.style.removeProperty('z-index');
+        if (!iframeLoaded) {
+          chatIframe.style.opacity = "0";
+        }
+      }
+      
+      // Hide expand backdrop if visible
+      if (expandBackdrop) {
+        expandBackdrop.style.display = "none";
+      }
+      if (loadingIndicator) {
+        loadingIndicator.style.display = "none";
+      }
+      
+      // Always show button when chat is closed (never show input again after first chat)
+      if (hasExistingChats) {
+        showChatButton();
+        chatBtn.innerHTML = getChatButtonIcon(false);
+      } else {
+        // Only show input if user has never had a chat
+        if (chatInputContainer) {
+          chatInputContainer.style.display = "flex";
+        }
+      }
+      
+      if (investBtn) investBtn.style.display = "inline-flex";
+      
+      // Adjust invest button position
+      adjustInvestButtonPosition();
+    } else if (e.data?.type === "toggleFullscreen" && chatIframe) {
+      // Handle fullscreen toggle from iframe - container-based only
+      if (!chatIframe.classList.contains("fullscreen")) {
+        // Enter container fullscreen
+        
+        // Find the script tag to determine the container
+        const scriptTag = document.currentScript || document.querySelector('script[src*="embedScript"]');
+        let container = scriptTag ? scriptTag.parentElement : document.body;
+        
+        // If container is body, look for a specific container div
+        if (container === document.body) {
+          // Check if there's a specific container div for the chat
+          const possibleContainers = document.querySelectorAll('[id*="chat"], [class*="chat"], [id*="orbiton"], [class*="orbiton"]');
+          if (possibleContainers.length > 0) {
+            container = possibleContainers[0];
+          }
+        }
+        
+        // Store original styles
+        chatIframe.dataset.originalStyles = JSON.stringify({
+          position: chatIframe.style.position,
+          top: chatIframe.style.top,
+          left: chatIframe.style.left,
+          right: chatIframe.style.right,
+          bottom: chatIframe.style.bottom,
+          width: chatIframe.style.width,
+          height: chatIframe.style.height
+        });
+        
+        // Apply container-based fullscreen
+        if (container !== document.body) {
+          container.style.position = 'relative';
+          chatIframe.style.position = 'absolute';
+        } else {
+          chatIframe.style.position = 'fixed';
+        }
+        
+        chatIframe.style.top = '0';
+        chatIframe.style.left = '0';
+        chatIframe.style.right = '0';
+        chatIframe.style.bottom = '0';
+        chatIframe.style.width = '100%';
+        chatIframe.style.height = '100%';
+        chatIframe.style.zIndex = '100004';
+        chatIframe.classList.add("fullscreen");
+        
+        // Hide other page elements when in fullscreen
+        if (chatBtn) chatBtn.style.display = "none";
+        if (chatInputContainer) chatInputContainer.style.display = "none";
+        if (investBtn) investBtn.style.display = "none";
+        // Notify iframe of fullscreen state
+        chatIframe.contentWindow.postMessage({ type: 'fullscreenStateChanged', isFullscreen: true }, '*');
+      } else {
+        // Exit container fullscreen
+        
+        // Restore original styles
+        if (chatIframe.dataset.originalStyles) {
+          const originalStyles = JSON.parse(chatIframe.dataset.originalStyles);
+          Object.keys(originalStyles).forEach(key => {
+            chatIframe.style[key] = originalStyles[key] || '';
+          });
+          delete chatIframe.dataset.originalStyles;
+        }
+        
+        chatIframe.classList.remove("fullscreen");
+        
+        if (chatBtn) chatBtn.style.display = "inline-flex";
+        if (chatInputContainer) chatInputContainer.style.display = "flex";
+        if (investBtn) investBtn.style.display = "inline-flex";
+        
+        // Adjust invest button position
+        adjustInvestButtonPosition();
+        
+        // Notify iframe of fullscreen state
+        chatIframe.contentWindow.postMessage({ type: 'fullscreenStateChanged', isFullscreen: false }, '*');
+      }
+    } else if (e.data?.type === "toggleExpanded" && chatIframe) {
+      // Handle expand mode toggle from iframe - 50% width, 90% height
+      const shouldExpand = e.data.isExpanded; // Use the value from the message
+      
+      if (shouldExpand && !chatIframe.classList.contains("expanded")) {
+        // Enter expanded mode
+        
+        // Apply expanded mode styles
+        chatIframe.style.position = 'fixed';
+        chatIframe.style.top = '5vh';
+        chatIframe.style.right = '0';
+        chatIframe.style.bottom = 'auto';
+        chatIframe.style.width = '50vw';
+        chatIframe.style.height = '90vh';
+        chatIframe.style.zIndex = '100003';
+        chatIframe.classList.add("expanded");
+        
+        // Create and show backdrop
+        if (!expandBackdrop) {
+          expandBackdrop = document.createElement('div');
+          expandBackdrop.className = 'orb-expand-backdrop';
+          expandBackdrop.onclick = function() {
+            // Collapse when backdrop is clicked
+            if (chatIframe && chatIframe.contentWindow) {
+              chatIframe.contentWindow.postMessage({ type: 'expandedStateChanged', isExpanded: false }, '*');
+            }
+          };
+          shadowContainer.appendChild(expandBackdrop);
+        }
+        expandBackdrop.style.display = 'block';
+        
+        // Hide other page elements when expanded
+        if (chatBtn) chatBtn.style.display = "none";
+        if (chatInputContainer) chatInputContainer.style.display = "none";
+        if (investBtn) investBtn.style.display = "none";
+        
+        // No need to notify iframe - it initiated this change
+      } else if (!shouldExpand && chatIframe.classList.contains("expanded")) {
+        // Exit expanded mode
+        
+        // Remove inline styles to let CSS defaults take over
+        chatIframe.style.removeProperty('position');
+        chatIframe.style.removeProperty('top');
+        chatIframe.style.removeProperty('right');
+        chatIframe.style.removeProperty('bottom');
+        chatIframe.style.removeProperty('width');
+        chatIframe.style.removeProperty('height');
+        chatIframe.style.removeProperty('z-index');
+        
+        chatIframe.classList.remove("expanded");
+        
+        // Hide backdrop
+        if (expandBackdrop) {
+          expandBackdrop.style.display = 'none';
+        }
+        
+        // Show other page elements
+        if (chatBtn) chatBtn.style.display = "inline-flex";
+        if (chatInputContainer) chatInputContainer.style.display = "flex";
+        if (investBtn) investBtn.style.display = "inline-flex";
+        
+        // Adjust invest button position
+        adjustInvestButtonPosition();
+        
+        // No need to notify iframe - it initiated this change
+      }
+    }
+  });
+
+  // Inject CSS into Shadow DOM for complete isolation
+  if (!shadowRoot.querySelector('style[data-orbiton-style]')) {
+    const style = document.createElement("style");
+    style.setAttribute("data-orbiton-style", "true");
+    style.innerHTML = `
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    /* Shadow DOM provides complete style isolation - no host styles can interfere */
+    /* CSS Reset for embedded elements - prevents host site interference */
+    .orb-chat-input-container {
+      all: initial;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      position: fixed;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0));
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      padding: 8px 10px;
+      border-radius: 24px;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+      z-index: 100001;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 16px;
+    }
+    
+    .orb-chat-input-container * {
+      box-sizing: border-box;
+    }
+    
+    .orb-chat-input-container input[type="text"] {
+      all: unset;
+      display: block;
+      width: 100%;
+    }
+    
+    /* Ensure no margins/padding interfere with fullscreen */
+    body.orb-fullscreen-active {
+      overflow: hidden !important;
+    }
+    
+    /* Ensure parent container can contain absolute positioned elements */
+    .orb-chat-container {
+      position: relative !important;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .orb-chat-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #ab003cee 0%, #ab003ccc 100%);
+      color: #fff;
+      padding: 0 24px 0 20px;
+      height: 48px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 100001;
+      white-space: nowrap;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    
+    .orb-chat-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    
+    .orb-chat-button:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .orb-chat-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 0 3px #ab003c33;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .orb-chat-button:active {
+      transform: translateY(0);
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.12),
+        0 2px 6px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    
+    .orb-button-text {
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    
+    .orb-chat-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+    
+    .orb-chat-button:hover .orb-chat-icon {
+      transform: scale(1.1);
+    }
+
+    @keyframes orb-pulse {
+      0% { 
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.12),
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2),
+          0 0 0 0 #ab003c66;
+      }
+      50% { 
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.12),
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2),
+          0 0 0 8px #ab003c00;
+      }
+      100% { 
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.12),
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2),
+          0 0 0 0 #ab003c00;
+      }
+    }
+    
+    .orb-chat-button.bounce {
+      animation: orb-pulse 2s ease-out;
+    }
+    
+    /* Chat Input Field Styles - with protection from host site CSS */
+    .orb-chat-input-container .orb-chat-input {
+      background: #f5f5f5 !important;
+      border: 1px solid #e0e0e0 !important;
+      border-radius: 16px !important;
+      padding: 8px 16px !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+      font-size: 16px !important;
+      min-width: 250px !important;
+      outline: none !important;
+      transition: all 0.2s ease !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      -webkit-border-radius: 16px !important;
+      -moz-border-radius: 16px !important;
+    }
+    
+    .orb-chat-input-container .orb-chat-input:focus {
+      background: #fff !important;
+      border-color: #ab003c !important;
+      box-shadow: 0 0 0 3px #ab003c22 !important;
+    }
+    
+    .orb-chat-input-container .orb-chat-input::placeholder {
+      color: #999 !important;
+    }
+    
+    
+    .orb-chat-input-container .orb-chat-send-btn {
+      background: linear-gradient(135deg, #ab003cee 0%, #ab003ccc 100%) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 16px !important;
+      width: 36px !important;
+      height: 36px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .orb-chat-input-container .orb-chat-send-btn svg {
+      width: 16px !important;
+      height: 16px !important;
+      display: block !important;
+      fill: currentColor !important;
+      stroke: currentColor !important;
+    }
+    
+    .orb-chat-input-container .orb-chat-send-btn:hover {
+      transform: scale(1.05) !important;
+      box-shadow: 0 4px 12px #ab003c44 !important;
+    }
+    
+    .orb-chat-input-container .orb-chat-send-btn:active {
+      transform: scale(0.95) !important;
+    }
+    
+    .orb-chat-input-container.bounce {
+      animation: orb-pulse 2s ease-out;
+    }
+
+    .orb-chat-iframe {
+      position: fixed;
+      bottom: 88px;
+      right: 24px;
+      width: calc(462px * 1);
+      height: 75vh;
+      max-height: calc(680px * 1);
+      border: none;
+      border-radius: 16px;
+      display: none;
+      z-index: 100002;
+      box-shadow: 
+        0 24px 48px rgba(0, 0, 0, 0.12),
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      background: #fff;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .orb-chat-iframe.fullscreen {
+      border-radius: 0 !important;
+      border: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      background: #fff !important;
+      max-width: none !important;
+      max-height: none !important;
+    }
+    
+    .orb-chat-iframe.expanded {
+      border-radius: 12px !important;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15) !important;
+      background: #fff !important;
+      transition: all 0.3s ease-out !important;
+    }
+    
+    .orb-expand-backdrop {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      background: rgba(0, 0, 0, 0.4) !important;
+      backdrop-filter: blur(4px) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+      z-index: 100002 !important;
+      display: none !important;
+      transition: opacity 0.3s ease-out !important;
+    }
+
+    .orb-chat-loading {
+      position: fixed !important;
+      bottom: 88px !important;
+      right: 24px !important;
+      width: calc(462px * 1) !important;
+      height: 75vh !important;
+      max-height: calc(680px * 1) !important;
+      border-radius: 16px !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(18px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+      display: none !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      z-index: 100005 !important;
+      box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.12) !important,
+        0 12px 24px rgba(0, 0, 0, 0.08) !important,
+        0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+      color: #1f2933 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+
+    .orb-chat-loading-spinner {
+      width: 32px !important;
+      height: 32px !important;
+      border: 3px solid rgba(0, 0, 0, 0.1) !important;
+      border-top-color: #ab003c !important;
+      border-radius: 50% !important;
+      animation: orb-spin 0.8s linear infinite !important;
+    }
+
+    .orb-chat-loading-text {
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    @keyframes orb-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 600px) {
+      .orb-chat-iframe {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100dvh;
+        max-height: none;
+        border-radius: 0;
+      }
+      
+      .orb-chat-button {
+        bottom: 16px;
+        right: 16px;
+        width: 44px; /* Fixed width for icon-only button */
+        height: 44px; /* Fixed height for icon-only button */
+        padding: 0; /* Remove padding for icon-only */
+        justify-content: center; /* Center the icon */
+      }
+      
+      .orb-chat-button .orb-chat-icon {
+        margin: 0; /* Remove any margin on icon */
+      }
+      
+      .orb-chat-input-container {
+        bottom: calc(12px + env(safe-area-inset-bottom, 0));
+        right: 12px;
+        left: 12px;
+        padding: 6px 10px;
+      }
+      
+      .orb-chat-input-container .orb-chat-input {
+        min-width: auto !important;
+        flex: 1 !important;
+        font-size: 16px !important; /* Prevent zoom on iOS */
+      }
+
+      .orb-chat-loading {
+        bottom: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100dvh !important;
+        max-height: none !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    /* Invest Modal */
+    .orb-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.5);
+      z-index: 100003;
+      padding: 20px;
+    }
+    .orb-modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      overflow-y: auto;
+    }
+    .orb-modal-content iframe {
+      width: 100%;
+      border: none;
+      transition: height 0.3s ease;
+      overscroll-behavior: contain;
+    }
+    .orb-close-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      z-index: 100004;
+    }
+    .orb-close-button:hover {
+      background: rgba(0,0,0,0.8);
+      transform: scale(1.1);
+    }
+
+    /* Invest Button */
+    .orb-invest-button {
+      position: fixed;
+      bottom: 24px;
+      right: 200px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #ab003c;
+      padding: 0 24px;
+      height: 48px;
+      border-radius: 24px;
+      border: 2px solid #ab003c33;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      z-index: 100001;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+    
+    
+    .orb-invest-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, #ab003c11 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    
+    .orb-invest-button:hover::after {
+      transform: translateX(100%);
+    }
+    
+    .orb-invest-button:hover {
+      transform: translateY(-2px);
+      background: #ab003c;
+      color: white;
+      border-color: #ab003c;
+      box-shadow: 
+        0 8px 24px #ab003c44,
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    
+    
+    .orb-invest-button:active {
+      transform: translateY(0);
+    }
+    
+    @media (max-width: 600px) {
+      .orb-invest-button {
+        position: fixed;
+        bottom: 16px;
+        left: 12px; /* Default position */
+        right: auto;
+        width: auto;
+        padding: 0 16px; /* Increased padding for better touch target */
+        height: 44px;
+        border-radius: 22px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        cursor: pointer;
+        z-index: 100001;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        box-shadow: 
+          0 4px 16px rgba(0, 0, 0, 0.08),
+          0 1px 3px rgba(0, 0, 0, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for position changes */
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.95);
+        color: #ab003c;
+        border: 2px solid #ab003c33;
+        margin-right: 0;
+      }
+      
+      .orb-chat-input-container {
+        bottom: calc(12px + env(safe-area-inset-bottom, 0));
+        right: 8px;
+        left: 100px; /* Increased from 84px to provide more space from invest button */
+        padding: 6px 10px;
+        max-width: calc(100vw - 118px); /* Adjusted to match new left position */
+      }
+      
+      .orb-chat-input-container .orb-chat-input {
+        padding: 6px 12px !important;
+        min-width: 90px !important;
+        font-size: 16px !important;
+      }
+    }
+
+    /* Preset Prompts */
+    .orb-preset-prompt-container {
+      position: fixed;
+      bottom: 88px;
+      right: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 420px;
+      z-index: 100000;
+      justify-content: flex-end;
+    }
+    
+    @media (max-width: 600px) {
+      .orb-preset-prompt-container {
+        bottom: 75px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+      }
+      
+      /* Ensure invest button has consistent sizing */
+      .orb-invest-button {
+        min-width: 70px; /* Minimum width for touch target */
+      }
+    }
+    
+    .orb-preset-prompt-button {
+      background: rgba(17, 17, 17, 0.85);
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 10px 18px 10px 32px; /* Always allocate space for emoji */
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    .orb-preset-prompt-button::before {
+      content: '✨';
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .orb-preset-prompt-button:hover::before {
+      opacity: 1;
+    }
+    
+    .orb-preset-prompt-button:hover {
+      background: #ab003cee;
+      border-color: #ab003c;
+      color: white;
+      transform: translateY(-1px);
+      /* Removed padding-left change to prevent width change */
+      box-shadow: 
+        0 4px 12px #ab003c44,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .orb-preset-prompt-button:active {
+      transform: translateY(0);
+    }
+
+    /* Per-company widget scale (defaults to 1.0). Anchored to bottom-right
+       so the closed-state widget shrinks toward its pinned position.
+       The opened iframe + loading panel use real width/height (above) so
+       internal text scales naturally instead of being transform-blurred. */
+    .orb-chat-input-container,
+    .orb-chat-button,
+    .orb-preset-prompt-container {
+      transform: scale(1);
+      transform-origin: bottom right;
+    }
+  `;
+    shadowRoot.appendChild(style);
+  }
+
+  // Function to adjust invest button position
+  function adjustInvestButtonPosition() {
+    if (!investBtn) return;
+    
+    const isMobile = window.innerWidth <= 600;
+    if (isMobile) {
+      // Mobile: dynamically position based on what's visible
+      if (chatIframe && chatIframe.style.display === "block") {
+        // Hide invest button when chat is open on mobile (full screen chat)
+        investBtn.style.display = "none";
+      } else {
+        // Show invest button when chat is closed
+        investBtn.style.display = "inline-flex";
+        
+        // Adjust position based on what's visible
+        if (chatInputContainer && chatInputContainer.style.display !== "none") {
+          // When chat input is visible, keep default left position
+          investBtn.style.left = "12px";
+          investBtn.style.right = "auto";
+        } else if (chatBtn && chatBtn.style.display !== "none") {
+          // When only chat button is visible, position closer to it
+          // Chat button is at right: 16px with width of 44px (icon only)
+          // Position invest button with minimal spacing
+          investBtn.style.left = "auto";
+          investBtn.style.right = "68px"; // 16px (chat button right) + 44px (button width) + 8px (spacing)
+        }
+      }
+      return;
+    }
+    
+    // Desktop positioning remains the same
+    if (chatInputContainer && chatInputContainer.style.display !== "none") {
+      // Position next to input container (which is wider)
+      investBtn.style.right = "345px";
+    } else {
+      // Position next to chat button
+      investBtn.style.right = "165px";
+    }
+  }
+
+  // Initialize chat interface based on existing chats
+  async function initChatInterface() {
+    hasExistingChats = await checkExistingChats();
+    
+    if (hasExistingChats) {
+      // Create Chat Button if user has existing chats
+      chatBtn = document.createElement("button");
+      chatBtn.className = "orb-chat-button";
+      chatBtn.innerHTML = getChatButtonIcon(false);
+      makeInteractive(chatBtn);
+      chatBtn.addEventListener("click", () => {
+        ensureChatIframe();
+        const hidden = chatIframe.style.display === "none" || chatIframe.style.display === "";
+        if (hidden) {
+          // Ensure loading indicator shows immediately, even before iframe starts loading
+          if (!iframeLoaded && !loadingIndicator) {
+            loadingIndicator = document.createElement("div");
+            loadingIndicator.className = "orb-chat-loading";
+            loadingIndicator.innerHTML = '<div class="orb-chat-loading-spinner"></div>' +
+              '<span class="orb-chat-loading-text">Loading chat...</span>';
+            shadowContainer.appendChild(loadingIndicator);
+          }
+          if (!iframeLoaded && loadingIndicator) {
+            loadingIndicator.style.display = "flex";
+          }
+          showIframe();
+        } else {
+          chatIframe.style.display = "none";
+          if (loadingIndicator) {
+            loadingIndicator.style.display = "none";
+          }
+          storage.setItem('orbiton_chat_dismissed', 'true');
+        }
+        chatBtn.innerHTML = getChatButtonIcon(hidden);
+        
+        // Ensure storage flag is set when opening chat via button
+        const hasExistingChatsKey = 'hasExistingChats'; // Use separate key for boolean flag
+        storage.setItem(hasExistingChatsKey, 'true');
+      });
+      shadowContainer.appendChild(chatBtn);
+    } else {
+      // Create input field if user has no existing chats
+      chatInputContainer = createChatInput();
+      shadowContainer.appendChild(chatInputContainer);
+    }
+    
+    // Preload the chat iframe so it is ready on first interaction
+    ensureChatIframe();
+
+    // Adjust invest button position after interface is set up
+    setTimeout(adjustInvestButtonPosition, 100);
+  }
+  
+  // Initialize the interface
+  initChatInterface();
+  
+  // Function to update chat button content based on screen size
+  function updateChatButtonContent() {
+    if (chatBtn) {
+      const isOpen = chatIframe && chatIframe.style.display === "block";
+      chatBtn.innerHTML = getChatButtonIcon(isOpen);
+    }
+  }
+  
+  // Handle window resize to adjust invest button position and update chat button
+  window.addEventListener('resize', () => {
+    adjustInvestButtonPosition();
+    updateChatButtonContent();
+  });
+
+  // Auto-open chat on page load unless the user previously dismissed it
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+  
+  if (!isMobile && false) {
+    setTimeout(() => {
+      const chatDismissed = storage.getItem('orbiton_chat_dismissed') === 'true';
+      if (!chatDismissed) {
+        ensureChatIframe();
+        showIframe();
+        showChatButton();
+        if (chatBtn) {
+          chatBtn.innerHTML = getChatButtonIcon(true);
+        }
+      }
+    }, 1000);
+  }
+
+  // Bounce every 2s if closed
+  setInterval(() => {
+    if (!chatIframe || chatIframe.style.display === "none") {
+      if (chatBtn) {
+        chatBtn.classList.add("bounce");
+        setTimeout(() => chatBtn.classList.remove("bounce"), 600);
+      }
+      if (chatInputContainer) {
+        chatInputContainer.classList.add("bounce");
+        setTimeout(() => chatInputContainer.classList.remove("bounce"), 600);
+      }
+    }
+  }, 2000);
+
+ // Create Invest Now modal & button
+  const modal = document.createElement("div");
+  modal.className = "orb-modal";
+  makeInteractive(modal);
+  const modalContent = document.createElement("div");
+  modalContent.className = "orb-modal-content";
+  const closeButton = document.createElement("div");
+  closeButton.className = "orb-close-button";
+  closeButton.innerHTML = "&times;";
+  closeButton.addEventListener("click", closeModal);
+  modalContent.appendChild(closeButton);
+  modal.appendChild(modalContent);
+  shadowContainer.appendChild(modal);
+  
+  // Close modal when clicking outside or pressing ESC
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "flex") {
+      closeModal();
+    }
+  });
+
+  function openModal(url) {
+    // Track what was visible before opening modal
+    if (chatInputContainer && chatInputContainer.style.display !== "none") {
+      previousUIState = "input";
+    } else if (chatBtn && chatBtn.style.display !== "none") {
+      previousUIState = "button";
+    } else if (chatIframe && chatIframe.style.display !== "none") {
+      previousUIState = "iframe";
+    }
+    
+    if (chatIframe) chatIframe.style.display = "none";
+    if (chatInputContainer) chatInputContainer.style.display = "none";
+    if (loadingIndicator) {
+      loadingIndicator.style.display = "none";
+    }
+    shadowContainer.querySelector(".orb-preset-prompt-container")?.style.setProperty("display", "none");
+
+    const existing = modalContent.querySelector("iframe");
+    if (existing && existing.parentNode === modalContent) {
+      if (existing.dataset.type === "invest" && investResizeHandler) {
+        window.removeEventListener("message", investResizeHandler);
+        investResizeHandler = null;
+      }
+      modalContent.removeChild(existing);
+    }
+       const iframe = document.createElement("iframe");
+    iframe.src = url;
+    iframe.style.overscrollBehavior = "contain";
+    iframe.dataset.type = "invest";
+    iframe.style.height = "600px";
+
+    investResizeHandler = (e) => {
+      if (e.data?.type === "resizeIframe" && typeof e.data.height === "number") {
+        iframe.style.height = e.data.height + "px";
+      }
+    };
+    window.addEventListener("message", investResizeHandler);
+
+    modalContent.appendChild(iframe);
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+    const existing = modalContent.querySelector("iframe");
+    if (existing && existing.dataset.type === "invest" && investResizeHandler) {
+      window.removeEventListener("message", investResizeHandler);
+      investResizeHandler = null;
+    }
+    existing && existing.parentNode === modalContent && modalContent.removeChild(existing);
+    
+    // Restore the previous UI state
+    if (previousUIState) {
+      switch (previousUIState) {
+        case "input":
+          showChatInput();
+          // Restore preset prompts if they were visible
+          const presetContainer = shadowContainer.querySelector(".orb-preset-prompt-container");
+          if (presetContainer && !hasExistingChats) {
+            presetContainer.style.display = "flex";
+          }
+          break;
+        case "button":
+          showChatButton();
+          break;
+        case "iframe":
+          if (chatIframe) showIframe();
+          if (chatBtn) chatBtn.innerHTML = getChatButtonIcon(true);
+          break;
+      }
+      previousUIState = null; // Reset the state
+    } else {
+      // Fallback to original logic if no previous state was tracked
+      if (!chatIframe || chatIframe.style.display === "none") {
+        if (hasExistingChats) {
+          showChatButton();
+        } else {
+          showChatInput();
+        }
+      }
+    }
+    
+    // Adjust invest button position
+    adjustInvestButtonPosition();
+  }
+
+  // Invest Now button
+  if (true) {
+    investBtn = document.createElement("button");
+    investBtn.className = "orb-invest-button";
+    makeInteractive(investBtn);
+    
+    // Set text based on screen size
+    const updateInvestButtonText = () => {
+      const isMobile = window.innerWidth <= 600;
+      investBtn.textContent = isMobile ? "Invest" : "Invest Now";
+    };
+    
+    updateInvestButtonText();
+    investBtn.addEventListener("click", () => openModal("https://learn.orbiton.app/cgnt/embed"));
+    shadowContainer.appendChild(investBtn);
+    
+    // Update text on resize
+    window.addEventListener("resize", updateInvestButtonText);
+  }
+
+  // Preset Prompts
+  const presetContainer = document.createElement("div");
+  presetContainer.className = "orb-preset-prompt-container";
+  makeInteractive(presetContainer);
+  JSON.parse("[\"Latest news?\",\"Upcoming catalysts?\"]").forEach((prompt) => {
+    const btn = document.createElement("button");
+    btn.className = "orb-preset-prompt-button";
+    btn.textContent = prompt;
+    btn.addEventListener("click", () => {
+      closeModal();
+      if (chatIframe) {
+        chatIframe.remove();
+        chatIframe = null;
+      }
+      // open chat fresh with prompt
+      ensureChatIframe();
+      showIframe();
+      
+      // Call showChatButton after chat is opened
+      showChatButton();
+      chatBtn.innerHTML = getChatButtonIcon(true);
+      
+      // Update storage to remember chat was started
+      const hasExistingChatsKey = 'hasExistingChats'; // Use separate key for boolean flag
+      storage.setItem(hasExistingChatsKey, 'true');
+      hasExistingChats = true;
+
+      // handshake
+      window.addEventListener("message", function handshake(e) {
+        if (e.source === chatIframe.contentWindow && e.data?.type === "chatReady") {
+          chatIframe.contentWindow.postMessage(
+            { type: "fillInput", question: prompt, newChat: true },
+            "*"
+          );
+          window.removeEventListener("message", handshake);
+        }
+      });
+    });
+    presetContainer.appendChild(btn);
+  });
+  shadowContainer.appendChild(presetContainer);
+
+  global.__orbitonInitialized = true;
+  global.__orbitonReady = true;
+  while (commandQueue.length) {
+    const task = commandQueue.shift();
+    try {
+      task();
+    } catch (error) {
+      console.error("Orbiton: error running queued command", error);
+    }
+  }
+  };
+  
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", orbitonInit, { once: true });
+  } else {
+    orbitonInit();
+  }
+})();

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper Giant | Legal Disclaimer</title>
+    
+    <!-- Apple-Grade Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-icon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigations -->
+    <div class="ticker-bar">
+        <span><strong>TSXV</strong>:CGNT C$0.64</span>
+        <span><strong>OTC</strong>:LBCMF $0.48</span>
+        <span><strong>FSE</strong>:29H0 €0.41</span>
+    </div>
+
+    <header class="nav-header">
+        <nav class="main-nav">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant">
+            </a>
+            <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+                        <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="mocoa.html">Mocoa Project</a>
+                <a href="corporate.html">Corporate</a>
+                <a href="investors.html">Investors</a>
+                <a href="news.html">News</a>
+                
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sub Navigation (General template) -->
+    <div class="sub-nav">
+        <h2>Legal</h2>
+        <div class="sub-nav-links">
+            <a href="legal.html" class="active">Disclaimer</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+        </div>
+    </div>
+
+    <!-- Editorial Text Section -->
+    <section class="section-padding container" style="padding-top: 150px; padding-bottom: 120px;">
+        <div style="max-width: 800px; margin: 0 auto; background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 60px 50px; border-radius: 32px;" class="legal-card">
+            <div class="text-eyebrow" style="margin-bottom: 15px;">Terms & Regulations</div>
+            <h1 class="text-h2" style="margin-bottom: 40px; color: white;">Legal Disclaimer</h1>
+            
+            <div style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7; display: flex; flex-direction: column; gap: 24px;">
+                <p>
+                    <strong>General Information:</strong> All materials, graphics, figures, tables and links provided on this website are for informational purposes only. 
+                    Copper Giant Resources Corp. ("Copper Giant" or the "Company") does not guarantee the accuracy, completeness, or timeliness of the information contained on this server.
+                </p>
+                <p>
+                    <strong>Forward-Looking Statements:</strong> This website contains "forward-looking statements" within the meaning of applicable Canadian securities legislation. 
+                    These statements relate to future events, programs, exploration goals, resource updates, the completion of a Preliminary Economic Assessment (PEA), and the Company's future performance. 
+                    All statements other than statements of historical fact are forward-looking statements. 
+                    Forward-looking statements involve known and unknown risks, uncertainties and other factors that may cause actual results or events to differ materially from those anticipated in such statements.
+                </p>
+                <p>
+                    <strong>Mineral Resource Estimates:</strong> The mineral resource estimates reported on this website are Inferred mineral resources. 
+                    Inferred mineral resources have a great amount of uncertainty as to their existence and geological feasibility. 
+                    It cannot be assumed that all or any part of an Inferred mineral resource will ever be upgraded to a higher category (Indicated or Measured) or that they are economically or legally mineable.
+                </p>
+                <p>
+                    <strong>Qualified Person:</strong> The technical information contained on this website has been reviewed and approved by a Qualified Person (QP) as defined under National Instrument 43-101 (Standards of Disclosure for Mineral Projects).
+                </p>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant Logo">
+            </div>
+            
+            <div class="footer-description">
+                <p>Copper Giant, part of the Fiore Group, is dedicated to advancing high-quality copper projects responsibly. Led by a team experienced in building major mines from discovery to construction, our current focus is the Mocoa copper-molybdenum project in southern Colombia—one of the largest undeveloped copper systems in the Americas. Grounded in our Good Neighbor philosophy, we are committed to creating enduring value for our communities and contributing to the global energy transition.</p>
+            </div>
+            
+            <div class="footer-address">
+                Suite 3123 – 595 Burrard Street, Vancouver, BC V7X 1J1, Canada
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © Copyright 2026 – Copper Giant. All Rights Reserved.
+            </div>
+            <div class="footer-links">
+                <a href="legal.html">Legal Disclaimer</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="btn-back-to-top" aria-label="Back to Top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <style>
+        @media (max-width: 580px) {
+            .legal-card {
+                padding: 30px 20px !important;
+            }
+        }
+    </style>
+
+    <!-- Animations Scripts -->
+    <script src="script.js"></script>
+    <!-- Get Updates Modal -->
+    <div class="modal-overlay" id="updates-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="btn-close-modal" aria-label="Close Modal">&times;</button>
+            
+            <!-- Form State -->
+            <div id="modal-form-state">
+                <div class="modal-header">
+                    <h3>Get Updates</h3>
+                    <p>Subscribe to receive exploration breakthroughs, corporate news, and financial updates directly to your inbox.</p>
+                </div>
+                <form class="modal-form" id="newsletter-modal-form" onsubmit="event.preventDefault(); showModalSuccess();">
+                    <div class="input-group">
+                        <label for="modal-name">Full Name</label>
+                        <input type="text" id="modal-name" class="input-field" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="modal-email">Email Address</label>
+                        <input type="email" id="modal-email" class="input-field" placeholder="john@example.com" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Press Releases
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Exploration Updates
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            Financial & Corporate Filings
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit-modal">Subscribe</button>
+                </form>
+            </div>
+            
+            <!-- Success State -->
+            <div class="modal-success-state" id="modal-success-state">
+                <div class="modal-success-icon">✓</div>
+                <h3>Subscription Confirmed</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-top: 10px;">Thank you for subscribing. You have been added to our updates mailing list.</p>
+                <button class="btn-copper" style="margin-top: 25px; padding: 10px 24px;" onclick="closeUpdatesModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

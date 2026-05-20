@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper Giant | News</title>
+    
+    <!-- Apple-Grade Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-icon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigations -->
+    <div class="ticker-bar">
+        <span><strong>TSXV</strong>:CGNT C$0.64</span>
+        <span><strong>OTC</strong>:LBCMF $0.48</span>
+        <span><strong>FSE</strong>:29H0 €0.41</span>
+    </div>
+
+    <header class="nav-header">
+        <nav class="main-nav">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant">
+            </a>
+            <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+                        <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="mocoa.html">Mocoa Project</a>
+                <a href="corporate.html">Corporate</a>
+                <a href="investors.html">Investors</a>
+                <a href="news.html" class="active">News</a>
+                
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <h2>Newsroom</h2>
+        <div class="sub-nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#press">Press Releases</a>
+            <a href="#media">Media</a>
+            <div style="display: flex; gap: 12px; margin-left: 20px;">
+                <a href="investors.html#presentation" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary);">Presentation</a>
+                <a href="#" class="btn-copper trigger-updates-modal">Get Updates</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="hero-overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%);"></div>
+        
+        <div class="hero-content fade-up">
+            <div class="text-eyebrow" style="margin-bottom: 20px;">Media Room & Communications</div>
+            <h1 class="text-display-giant">Press &<br>Updates</h1>
+            <p class="hero-subtitle">Follow our exploration breakthroughs, resource expansions, and community updates in southern Colombia.</p>
+        </div>
+    </section>
+
+    <!-- Press Releases Section -->
+    <section class="section-padding container" id="press" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="text-eyebrow">Announcements</div>
+        <h2 class="text-h2" style="margin-top: 10px; margin-bottom: 50px;">Press Releases</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 30px; max-width: 950px; margin: 0 auto;">
+            <!-- Featured Press Release (Highlight Bento style) -->
+            <div class="fade-up" style="background: rgba(255, 85, 34, 0.05); backdrop-filter: blur(24px); border: 1px solid rgba(255, 85, 34, 0.2); padding: 45px; border-radius: 28px; display: flex; flex-direction: column; gap: 15px; position: relative;">
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--copper-primary); font-weight: 700;">MAY 5, 2026</span>
+                    <span style="font-size: 0.75rem; background: var(--copper-primary); color: white; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">TECHNICAL</span>
+                </div>
+                <h3 style="font-size: 1.8rem; line-height: 1.4; color: white; font-weight: 700; max-width: 800px;">
+                    <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/cms-assets/company-2/news-releases/2026-05-05-cgnt-mocoa-pea-final.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Begins Planned Comprehensive PEA for the Mocoa Copper-Molybdenum System with Globally Recognized Development Team</a>
+                </h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem; max-width: 800px; margin-bottom: 15px;">
+                    Copper Giant has launched a planned NI 43-101 Preliminary Economic Assessment for the Mocoa copper-molybdenum project, appointing SLR as lead consultant alongside INTERA, Frank Wright Consulting, SGS Canada, and APEX Geoscience.
+                </p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/cms-assets/company-2/news-releases/2026-05-05-cgnt-mocoa-pea-final.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="padding: 10px 20px; font-size: 0.85rem;">Read Full Release</a>
+                    <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/cms-assets/company-2/news-releases/2026-05-05-cgnt-mocoa-pea-final.pdf" download target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem;">Download PDF</a>
+                </div>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.05s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">APRIL 28, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">CORPORATE</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/4001181.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant, Working with the Colombian Government, Secures LongTerm Development Framework at Mocoa; Third Drill Rig Now Operational</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/4001181.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.10s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">APRIL 24, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">GOVERNANCE</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-04-24_12-26-16.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Notice of Meeting and Record Date Copper Giant Resources Corp</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-04-24_12-26-16.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.15s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">APRIL 14, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">EXPLORATION</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-04-14_06-44-53.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant's First Directional Daughter Holes Beat Resource Model at Mocoa, Returning 0.97% CuEq (0.70% Cu and 0.051% Mo) Over 68m Within 371m of 0.53% CuEq (0.40% Cu and 0.02% Mo), While Continuing to Identify Higher Grades at the Southern Margin of Mocoa</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-04-14_06-44-53.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.20s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">APRIL 8, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">EXPLORATION</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-04-08_06-40-12.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Targets New Porphyry Centers Beyond Mocoa Resource with Third Drill Rig</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-04-08_06-40-12.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.25s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">MARCH 16, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">EXPLORATION</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-03-16_06-40-13.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Intersects 257 Metres of 0.63% CuEq* (0.47% Cu and 0.03% Mo) in Infill Drilling and Identifies Higher Grades at Depth Along the Southern Margin of Mocoa</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-03-16_06-40-13.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.30s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">MARCH 11, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">FINANCIAL</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-03-11_17-50-58.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Announces Option Grant</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-03-11_17-50-58.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.35s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">MARCH 2, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">TECHNICAL</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-03-02_07-39-06.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Initiates Next Phase Metallurgical Testing At Mocoa As Part Of Integrated Strategy for the 2026 PEA Advancement</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-03-02_07-39-06.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.40s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">FEBRUARY 24, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">EXPLORATION</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-02-24_07-43-05.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Engages Aziwell to Implement Directional Drilling at the Mocoa Project</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-02-24_07-43-05.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.45s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">FEBRUARY 17, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">EXPLORATION</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-02-17_07-44-46.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Announces the 2026 Exploration Plan, Targeting 23,000 metres of Drilling, the Largest Drilling Program in the History of The Mocoa Project</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-02-17_07-44-46.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.50s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">JANUARY 29, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">EXPLORATION</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-01-29_07-48-10.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Delivers Grades Above the 2026 Resource Model and Confirms Porphyry-Style Mineralization at the La Estrella Target</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-01-29_07-48-10.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.55s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">JANUARY 15, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">FINANCIAL</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-01-15_01-35-02.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">COPPER GIANT ANNOUNCES CLOSING OF NON-BROKERED PRIVATE PLACEMENT OF UNITS</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-01-15_01-35-02.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+
+            <div class="fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 35px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 30px; transition-delay: 0.60s;">
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);">JANUARY 9, 2026</span>
+                        <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-glass); padding: 2px 6px; border-radius: 4px; font-weight: 600; font-family: var(--font-mono);">TECHNICAL</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; color: white; font-weight: 600; line-height: 1.4;">
+                        <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-01-09_07-44-28.pdf" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--copper-primary)'" onmouseout="this.style.color='white'">Copper Giant Announces Filing of Technical Report for the Mocoa Project containing Updated Mineral Resource Estimate</a>
+                    </h3>
+                </div>
+                <a href="https://mviwzjlrkcinutxpykvc.supabase.co/storage/v1/object/public/documents/2/CGNT_2026-01-09_07-44-28.pdf" target="_blank" rel="noopener noreferrer" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary); padding: 10px 20px; font-size: 0.85rem; height: fit-content; white-space: nowrap;">Read PDF</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section class="section-padding" id="media" style="background: var(--bg-deep); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding-top: 100px; padding-bottom: 100px;">
+        <div class="container">
+            <div class="text-eyebrow">Industry Coverage</div>
+            <h2 class="text-h2" style="margin-top: 10px; margin-bottom: 50px;">Media Coverage & Reports</h2>
+            
+            <div class="photo-bento">
+                <!-- Media Card 1 -->
+                <div class="photo-card medium fade-up">
+                    <div class="photo-card-img" style="background-image: url('https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=2940&auto=format&fit=crop');"></div>
+                    <div class="photo-card-content">
+                        <div class="text-eyebrow" style="margin-bottom: 10px;">The Northern Miner</div>
+                        <h3>Mocoa's Expansion Potential</h3>
+                        <p>How Copper Giant is mapping out the large-scale copper-molybdenum porphyry system in southern Colombia.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 2 -->
+                <div class="photo-card medium fade-up" style="transition-delay: 0.1s;">
+                    <div class="photo-card-img" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2940&auto=format&fit=crop');"></div>
+                    <div class="photo-card-content">
+                        <div class="text-eyebrow" style="margin-bottom: 10px;">Resource Investing News</div>
+                        <h3>Addressing the Copper Shortage</h3>
+                        <p>Frank Giustra discusses the strategic importance of Colombian copper deposits for global electrification.</p>
+                    </div>
+                </div>
+
+                <!-- Media Card 3 -->
+                <div class="photo-card medium fade-up" style="transition-delay: 0.2s;">
+                    <div class="photo-card-img" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2940&auto=format&fit=crop');"></div>
+                    <div class="photo-card-content">
+                        <div class="text-eyebrow" style="margin-bottom: 10px;">Mining Journal</div>
+                        <h3>Colombia's Next Generation Mines</h3>
+                        <p>An in-depth analysis of Mocoa's infrastructure access, local support, and low-footprint engineering.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant Logo">
+            </div>
+            
+            <div class="footer-description">
+                <p>Copper Giant, part of the Fiore Group, is dedicated to advancing high-quality copper projects responsibly. Led by a team experienced in building major mines from discovery to construction, our current focus is the Mocoa copper-molybdenum project in southern Colombia—one of the largest undeveloped copper systems in the Americas. Grounded in our Good Neighbor philosophy, we are committed to creating enduring value for our communities and contributing to the global energy transition.</p>
+            </div>
+            
+            <div class="footer-address">
+                Suite 3123 – 595 Burrard Street, Vancouver, BC V7X 1J1, Canada
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © Copyright 2026 – Copper Giant. All Rights Reserved.
+            </div>
+            <div class="footer-links">
+                <a href="legal.html">Legal Disclaimer</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="btn-back-to-top" aria-label="Back to Top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <!-- Animations Scripts -->
+    <script src="script.js"></script>
+    <!-- Get Updates Modal -->
+    <div class="modal-overlay" id="updates-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="btn-close-modal" aria-label="Close Modal">&times;</button>
+            
+            <!-- Form State -->
+            <div id="modal-form-state">
+                <div class="modal-header">
+                    <h3>Get Updates</h3>
+                    <p>Subscribe to receive exploration breakthroughs, corporate news, and financial updates directly to your inbox.</p>
+                </div>
+                <form class="modal-form" id="newsletter-modal-form" onsubmit="event.preventDefault(); showModalSuccess();">
+                    <div class="input-group">
+                        <label for="modal-name">Full Name</label>
+                        <input type="text" id="modal-name" class="input-field" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="modal-email">Email Address</label>
+                        <input type="email" id="modal-email" class="input-field" placeholder="john@example.com" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Press Releases
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Exploration Updates
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            Financial & Corporate Filings
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit-modal">Subscribe</button>
+                </form>
+            </div>
+            
+            <!-- Success State -->
+            <div class="modal-success-state" id="modal-success-state">
+                <div class="modal-success-icon">✓</div>
+                <h3>Subscription Confirmed</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-top: 10px;">Thank you for subscribing. You have been added to our updates mailing list.</p>
+                <button class="btn-copper" style="margin-top: 25px; padding: 10px 24px;" onclick="closeUpdatesModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

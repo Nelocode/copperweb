@@ -11,3 +11,15 @@ yarn-error.log*
 .vscode
 # Ignore unused raw video file to reduce image size
 220175.mp4
+
+# Backup and mockup folders to keep docker image clean and light
+backup_pre_improvements/
+backup_v2/
+backup_v3/
+CGNT-Web-Redesign/
+
+# Development scripts and raw source downloads
+scratch/
+web completa/
+Dockerfile
+.dockerignore

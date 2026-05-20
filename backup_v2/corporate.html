@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper Giant | Corporate</title>
+    
+    <!-- Apple-Grade Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-icon.png">
+    <link rel="stylesheet" href="style.css?v=2.1">
+</head>
+<body>
+
+    <!-- Navigations -->
+    <div class="ticker-bar">
+        <span><strong>TSXV</strong>:CGNT C$0.64</span>
+        <span><strong>OTC</strong>:LBCMF $0.48</span>
+        <span><strong>FSE</strong>:29H0 €0.41</span>
+    </div>
+
+    <header class="nav-header">
+        <nav class="main-nav">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant">
+            </a>
+            <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+                        <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="mocoa.html">Mocoa Project</a>
+                <a href="corporate.html" class="active">Corporate</a>
+                <a href="investors.html">Investors</a>
+                <a href="news.html">News</a>
+                
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <h2>Corporate</h2>
+        <div class="sub-nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#about">About</a>
+            <a href="#leadership">Leadership</a>
+            <a href="#values">Our Values</a>
+            <a href="#esg">ESG & Impact</a>
+            <div style="display: flex; gap: 12px; margin-left: 20px;">
+                <a href="investors.html#presentation" class="btn-copper" style="background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary);">Presentation</a>
+                <a href="#" class="btn-copper trigger-updates-modal">Get Updates</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="hero-overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%);"></div>
+        
+        <div class="hero-content fade-up">
+            <div class="text-eyebrow" style="margin-bottom: 20px;">Fiore Group Portfolio Company</div>
+            <h1 class="text-display-giant">Built on<br>Trust</h1>
+            <p class="hero-subtitle">Copper Giant is part of the Fiore Group, advancing high-quality copper projects responsibly, efficiently, and with long-term positive impact.</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat-item">
+                    <div class="hero-stat-val">$30B+</div>
+                    <div class="hero-stat-label">Value Created</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-val">40+ Yrs</div>
+                    <div class="hero-stat-label">Mining Experience</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-val">89%</div>
+                    <div class="hero-stat-label">Local Employees</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-padding container" id="about" style="padding-top: 100px; padding-bottom: 100px;">
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;" class="photo-bento">
+            <!-- Left Side: Text -->
+            <div class="fade-up">
+                <div class="text-eyebrow">Corporate Profile</div>
+                <h2 class="text-h2" style="margin-top: 10px; margin-bottom: 25px;">About Copper Giant</h2>
+                <div style="display: flex; flex-direction: column; gap: 20px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.65;">
+                    <p><strong style="color: white;">Copper Giant</strong> is part of the Fiore Group, a private and well-established Canadian organization known for building successful, high-impact companies across the natural resource sector. Copper Giant was formed with a singular focus: to advance high-quality copper projects beyond resource definition responsibly, efficiently, and with long-term positive impact.</p>
+                    <p>The Company is led by a team with uncommon experience, having successfully taken some of the few major copper mines developed in the past two decades from discovery through to construction.</p>
+                    <p>Copper Giant's current focus is the Mocoa copper-molybdenum deposit in southern Colombia, one of the largest undeveloped resources of its kind in the Americas. Recent exploration success has revealed potential well beyond its original footprint, highlighting Mocoa as a broader district-scale opportunity — and the catalyst for the Company's name and evolution.</p>
+                    <p>Guided by the values of respect and responsibility, and grounded in its Good Neighbor philosophy, Copper Giant is committed to creating enduring values for all stakeholders and playing a meaningful role in the global energy transition.</p>
+                </div>
+            </div>
+            <!-- Right Side: Image -->
+            <div class="fade-up" style="height: 100%; min-height: 400px; border-radius: 24px; overflow: hidden; border: 1px solid var(--border-glass); background: rgba(10, 10, 10, 0.3);">
+                <div style="background-image: url('assets/about-team.jpg'); background-size: cover; background-position: center; width: 100%; height: 100%; min-height: 400px;" aria-label="Copper Giant team at PDAC 2026"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="section-padding container" id="leadership" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="text-eyebrow">Backed by Visionaries</div>
+        <h2 class="text-h2" style="margin-top: 10px; margin-bottom: 45px;">Fiore Group & Frank Giustra</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start;" class="photo-bento">
+            <!-- Left Side: Profile Card (Bento Style) -->
+            <div class="photo-card full fade-up" style="min-height: 480px; grid-column: span 12; display: grid; grid-template-columns: 1fr 1.5fr; background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass);">
+                <div style="background-image: url('assets/frank-giustra.jpg'); background-size: cover; background-position: center top; height: 100%; border-radius: 32px 0 0 32px;" class="leadership-photo"></div>
+                <div style="padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+                    <div class="text-eyebrow" style="margin-bottom: 10px;">Fiore Group Founder</div>
+                    <h3 style="font-size: 2.2rem; margin-bottom: 20px; font-weight: 700; color: white;">Frank Giustra</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1.1rem; line-height: 1.6;">
+                        Frank Giustra is a visionary entrepreneur, financier, and philanthropist whose career has left an indelible mark on the global mining industry. 
+                        He was instrumental in the formation and growth of Wheaton Precious Metals (formerly Silver Wheaton), pioneering the streaming model, 
+                        founded Endeavour Mining—now one of the world's largest gold producers—and co-founded Aris Mining.
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">
+                        The Fiore Group, his private investment and advisory firm, incubates and scales innovative small-cap companies with billion-dollar potential. 
+                        Copper Giant is a cornerstone of the Fiore portfolio, benefitting from decades of mine-building expertise.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Subsection -->
+        <div class="team-subsection" style="margin-top: 80px;">
+            <h3 class="text-h3" style="font-size: 2rem; color: white; margin-bottom: 10px;">Management</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 40px; max-width: 600px;">Led by a team with uncommon experience in taking major copper mines from discovery through to construction.</p>
+            <div class="team-grid">
+                <!-- Ian Harris -->
+                <div class="team-card fade-up" data-name="Ian Harris" data-role="President & CEO | Director" data-img="assets/ian-harris.webp" data-bio="Ian Harris is a seasoned mining engineer and executive with over 20 years of experience in the mining industry, including more than a decade of leadership roles in South America. He has a proven track record of advancing major projects from discovery to construction and production. Notably, he played a key role in the development of the Mirador mine in Ecuador, contributing to the sale of Corriente Resources for $690 million. He has also served as CEO of Al Masane Al Kobra Mining Co. and President of Soma Gold Corp.">
+                    <div class="team-card-img" style="background-image: url('assets/ian-harris.webp');"></div>
+                    <div class="team-card-info">
+                        <h4>Ian Harris</h4>
+                        <p>President & CEO | Director</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Frank Balint -->
+                <div class="team-card fade-up" data-name="Frank Balint" data-role="Strategic Advisor" data-img="" data-bio="Frank Balint is a professional geologist (P.Geo) and seasoned mining executive with over 45 years of experience. He spent nearly 20 years with Inmet Mining Corporation as VP of Corporate Development and VP of Exploration, playing a key role in increasing its market capitalization from $200 million to over $5 billion. He was instrumental in advancing the world-class Cobre Panama copper project. He has also served on the boards of Wolfden Resources, GoldQuest Mining, and Doré Copper Mining.">
+                    <div class="team-card-placeholder">
+                        <span>FB</span>
+                    </div>
+                    <div class="team-card-info">
+                        <h4>Frank Balint</h4>
+                        <p>Strategic Advisor</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Tetiana Konstantynivska -->
+                <div class="team-card fade-up" data-name="Tetiana Konstantynivska" data-role="VP of Investor Relations" data-img="assets/tetiana-konstantynivska.jpg" data-bio="Tetiana Konstantynivska is an investor relations and digital marketing professional specializing in the mining and metals sector. She has worked with numerous public and private companies across exploration, development, and production. Previously, she led communications at Lucara Diamond, served as Director of Communications at Dolly Varden Silver, and executed marketing campaigns for West Red Lake Gold Mines. She holds a B.A. from the University of British Columbia.">
+                    <div class="team-card-img" style="background-image: url('assets/tetiana-konstantynivska.jpg');"></div>
+                    <div class="team-card-info">
+                        <h4>Tetiana Konstantynivska</h4>
+                        <p>VP of Investor Relations</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Edwin Naranjo Sierra -->
+                <div class="team-card fade-up" data-name="Edwin Naranjo Sierra" data-role="VP of Exploration" data-img="assets/edwin-naranjo-sierra.jpg" data-bio="Edwin Naranjo Sierra is a professional geologist and expert in mineral exploration with extensive experience in the Colombian Andes. He has served as Exploration Manager for Libero Copper, leading programs at the Mocoa copper-molybdenum project. He holds an MSc in Earth Sciences and is a Fellow of the Australasian Institute of Mining and Metallurgy (FAusIMM), serving as the Qualified Person (QP) for technical disclosure.">
+                    <div class="team-card-img" style="background-image: url('assets/edwin-naranjo-sierra.jpg');"></div>
+                    <div class="team-card-info">
+                        <h4>Edwin Naranjo Sierra</h4>
+                        <p>VP of Exploration</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Thyana Álvarez -->
+                <div class="team-card fade-up" data-name="Thyana Álvarez" data-role="VP & Country Manager" data-img="assets/thyana-alvarez.webp" data-bio="Thyana Álvarez is a Colombian mining executive with over 25 years of experience in sustainability and corporate relations. She oversees community engagement and operations for the Mocoa project. Known for her leadership in responsible mining and ESG, she was recognized by Semana magazine as one of Colombia’s most influential women in emerging industries. She has led direct, face-to-face dialogues with local Indigenous communities like the Inga Condagua to build trust without intermediaries.">
+                    <div class="team-card-img" style="background-image: url('assets/thyana-alvarez.webp');"></div>
+                    <div class="team-card-info">
+                        <h4>Thyana Álvarez</h4>
+                        <p>VP & Country Manager</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Board of Directors Subsection -->
+        <div class="team-subsection" style="margin-top: 80px;">
+            <h3 class="text-h3" style="font-size: 2rem; color: white; margin-bottom: 10px;">Board of Directors</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 40px; max-width: 600px;">Experienced leaders guiding Copper Giant's strategic direction and governance.</p>
+            <div class="team-grid">
+                <!-- Robert Van Egmond -->
+                <div class="team-card fade-up" data-name="Robert Van Egmond" data-role="Director" data-img="assets/robert-van-egmond.webp" data-bio="Robert Van Egmond is a professional geologist with 35 years of international exploration experience spanning North America, South America, and Africa. He has held senior roles at Dolly Varden Silver Corp and served as a director for West Red Lake Gold Mines Ltd. He brings deep technical expertise in resource expansion and porphyry copper systems.">
+                    <div class="team-card-img" style="background-image: url('assets/robert-van-egmond.webp');"></div>
+                    <div class="team-card-info">
+                        <h4>Robert Van Egmond</h4>
+                        <p>Director</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Mark Gibson -->
+                <div class="team-card fade-up" data-name="Mark Gibson" data-role="Director" data-img="assets/mark-gibson.webp" data-bio="Mark Gibson is a geophysicist and mining executive with over 35 years of global experience in exploration, operations, and project development. He previously served as Chief Operating Officer of Ivanhoe Electric Inc. and Kaizen Discovery, and as COO of Cordoba Minerals, where he was key in advancing the Alacran copper-gold project in Colombia. He is currently CEO of FeCycle Technologies Group.">
+                    <div class="team-card-img" style="background-image: url('assets/mark-gibson.webp');"></div>
+                    <div class="team-card-info">
+                        <h4>Mark Gibson</h4>
+                        <p>Director</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Jay Sujir -->
+                <div class="team-card fade-up" data-name="Jay Sujir" data-role="Director" data-img="assets/jay-sujir.jpg" data-bio="Jay Sujir is a securities and natural resources lawyer with over 25 years of experience. He is a senior partner at Farris, Vaughan, Wills & Murphy LLP, specializing in corporate finance, mergers & acquisitions, and securities regulation. He advises numerous natural resource exploration and development companies on governance, financing, and corporate strategy.">
+                    <div class="team-card-img" style="background-image: url('assets/jay-sujir.jpg');"></div>
+                    <div class="team-card-info">
+                        <h4>Jay Sujir</h4>
+                        <p>Director</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Ian Harris -->
+                <div class="team-card fade-up" data-name="Ian Harris" data-role="Director" data-img="assets/ian-harris.webp" data-bio="Ian Harris is a seasoned mining engineer and executive with over 20 years of experience in the mining industry, including more than a decade of leadership roles in South America. He has a proven track record of advancing major projects from discovery to construction and production. Notably, he played a key role in the development of the Mirador mine in Ecuador, contributing to the sale of Corriente Resources for $690 million. He has also served as CEO of Al Masane Al Kobra Mining Co. and President of Soma Gold Corp.">
+                    <div class="team-card-img" style="background-image: url('assets/ian-harris.webp');"></div>
+                    <div class="team-card-info">
+                        <h4>Ian Harris</h4>
+                        <p>Director</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+                <!-- Ernest Mast -->
+                <div class="team-card fade-up" data-name="Ernest Mast" data-role="Director" data-img="assets/ernest-mast.webp" data-bio="Ernest Mast has over 30 years of technical and executive experience in the mining sector. He previously served as President and CEO of Primero Mining Corp. and Minera Panama S.A., where he led the development of the world-class Cobre Panama project. He also served as VP of Operations at New Gold Inc. He holds Bachelor’s and Master’s degrees in metallurgical engineering from McGill University.">
+                    <div class="team-card-img" style="background-image: url('assets/ernest-mast.webp');"></div>
+                    <div class="team-card-info">
+                        <h4>Ernest Mast</h4>
+                        <p>Director</p>
+                        <span class="view-bio-btn">View Bio →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="section-padding" id="values" style="background: var(--bg-deep); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding-top: 100px; padding-bottom: 100px;">
+        <div class="container">
+            <div class="text-eyebrow">Operating Principles</div>
+            <h2 class="text-h2" style="margin-top: 10px; margin-bottom: 50px;">Core Values</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+                <!-- Value Card 1 -->
+                <div class="fade-up" style="background: var(--bg-glass); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; transition: all 0.3s ease;">
+                    <div style="font-size: 2.5rem; color: var(--copper-primary); font-weight: 800; margin-bottom: 20px; font-family: var(--font-mono);">01</div>
+                    <h3 class="text-h3" style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Vision</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">To be a leading copper producer, safely and responsibly contributing to the global energy transition and enabling green technologies.</p>
+                </div>
+
+                <!-- Value Card 2 -->
+                <div class="fade-up" style="background: var(--bg-glass); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; transition: all 0.3s ease; transition-delay: 0.1s;">
+                    <div style="font-size: 2.5rem; color: var(--copper-primary); font-weight: 800; margin-bottom: 20px; font-family: var(--font-mono);">02</div>
+                    <h3 class="text-h3" style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Responsibility</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Operating with the highest standards of environmental, safety, and social governance. We prioritize the health and protection of the Putumayo ecosystem.</p>
+                </div>
+
+                <!-- Value Card 3 -->
+                <div class="fade-up" style="background: var(--bg-glass); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; transition: all 0.3s ease; transition-delay: 0.2s;">
+                    <div style="font-size: 2.5rem; color: var(--copper-primary); font-weight: 800; margin-bottom: 20px; font-family: var(--font-mono);">03</div>
+                    <h3 class="text-h3" style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Community</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Building lasting, positive relationships with local communities through transparent engagement and our Good Neighbor philosophy.</p>
+                </div>
+
+                <!-- Value Card 4 -->
+                <div class="fade-up" style="background: var(--bg-glass); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; transition: all 0.3s ease; transition-delay: 0.3s;">
+                    <div style="font-size: 2.5rem; color: var(--copper-primary); font-weight: 800; margin-bottom: 20px; font-family: var(--font-mono);">04</div>
+                    <h3 class="text-h3" style="font-size: 1.4rem; margin-bottom: 15px; color: white;">Impact</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Creating enduring economic, educational, and structural values for our stakeholders, host communities, and future generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESG & Community Impact Section -->
+    <section class="section-padding container" id="esg" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="text-eyebrow">Social License & Governance</div>
+        <h2 class="text-h2" style="margin-top: 10px; margin-bottom: 20px;">The Copper Giant Way</h2>
+        <p class="hero-subtitle" style="margin-left: 0; text-align: left; max-width: 800px; margin-bottom: 50px;">
+            At Copper Giant, we believe successful mining projects are built on a foundation of trust, respect, and shared value. 
+            Our Good Neighbor philosophy guides everything we do—from how we engage with communities to how we manage our environmental footprint.
+        </p>
+
+        <div class="photo-bento">
+            <!-- Full Width Card (Video Background styled) -->
+            <div class="photo-card full glass-panel fade-up" style="overflow: hidden;">
+                <video autoplay loop muted defaultMuted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.6);" oncanplay="this.playbackRate=1.0; this.play()">
+                    <source src="11490-230853032.mp4" type="video/mp4">
+                </video>
+                <div class="photo-card-content" style="z-index: 3; position: relative;">
+                    <div class="text-eyebrow" style="margin-bottom: 10px;">Putumayo Community</div>
+                    <h3>Local Strength</h3>
+                    <p>89% of our direct workforce is local to Putumayo. We are proud partners in the development of southern Colombia.</p>
+                </div>
+            </div>
+
+            <!-- Left Bento Column (Stats cards) -->
+            <div class="photo-card medium fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass);">
+                <div class="photo-card-content" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 40px;">
+                    <span style="font-size: 4rem; font-weight: 800; color: var(--copper-primary); font-family: var(--font-mono); line-height: 1;">230</span>
+                    <h4 style="color: white; font-size: 1.3rem; margin-top: 15px; margin-bottom: 10px;">Local Suppliers</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">We prioritize sourcing from local companies to support the local economy.</p>
+                </div>
+            </div>
+
+            <div class="photo-card medium fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); transition-delay: 0.1s;">
+                <div class="photo-card-content" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 40px;">
+                    <span style="font-size: 4rem; font-weight: 800; color: var(--copper-primary); font-family: var(--font-mono); line-height: 1;">527</span>
+                    <h4 style="color: white; font-size: 1.3rem; margin-top: 15px; margin-bottom: 10px;">Indirect Jobs</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Creating structural jobs, expanding logistics, and investing in regional infrastructure.</p>
+                </div>
+            </div>
+
+            <div class="photo-card medium fade-up" style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); transition-delay: 0.2s;">
+                <div class="photo-card-content" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 40px;">
+                    <span style="font-size: 4rem; font-weight: 800; color: var(--copper-primary); font-family: var(--font-mono); line-height: 1;">164</span>
+                    <h4 style="color: white; font-size: 1.3rem; margin-top: 15px; margin-bottom: 10px;">Direct Employees</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">A highly skilled, diverse team committed to running a safe and clean operation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESG Commitment & Key Initiatives -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; margin-top: 80px; align-items: start;" class="photo-bento fade-up">
+            <!-- Left: Commitment -->
+            <div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 700; color: white;">ESG Commitment</h3>
+                <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; margin: 0;">
+                    Environmental, Social, and Governance (ESG) considerations are integrated into every aspect of our operations. We recognize that our long-term success depends on operating responsibly and creating value for all stakeholders.
+                    <br><br>
+                    From comprehensive environmental baseline studies to ongoing community engagement programs, we are committed to setting the standard for responsible mining in Colombia.
+                </p>
+            </div>
+            <!-- Right: Initiatives Checklist -->
+            <div style="background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(24px); border: 1px solid var(--border-glass); padding: 40px; border-radius: 24px;">
+                <h4 style="color: white; font-size: 1.25rem; font-weight: 700; margin-bottom: 25px;">Key ESG Initiatives</h4>
+                <ul class="esg-list">
+                    <li class="esg-list-item">
+                        <span class="checkmark">✓</span>
+                        Comprehensive environmental management system
+                    </li>
+                    <li class="esg-list-item">
+                        <span class="checkmark">✓</span>
+                        Community development programs
+                    </li>
+                    <li class="esg-list-item">
+                        <span class="checkmark">✓</span>
+                        Local hiring and procurement policies
+                    </li>
+                    <li class="esg-list-item">
+                        <span class="checkmark">✓</span>
+                        Transparent stakeholder engagement
+                    </li>
+                    <li class="esg-list-item">
+                        <span class="checkmark">✓</span>
+                        Health and safety excellence
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="assets/logo-cgnt.webp" alt="Copper Giant Logo">
+            </div>
+            
+            <div class="footer-description">
+                <p>Copper Giant, part of the Fiore Group, is dedicated to advancing high-quality copper projects responsibly. Led by a team experienced in building major mines from discovery to construction, our current focus is the Mocoa copper-molybdenum project in southern Colombia—one of the largest undeveloped copper systems in the Americas. Grounded in our Good Neighbor philosophy, we are committed to creating enduring value for our communities and contributing to the global energy transition.</p>
+            </div>
+            
+            <div class="footer-address">
+                Suite 3123 – 595 Burrard Street, Vancouver, BC V7X 1J1, Canada
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © Copyright 2026 – Copper Giant. All Rights Reserved.
+            </div>
+            <div class="footer-links">
+                <a href="legal.html">Legal Disclaimer</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="btn-back-to-top" aria-label="Back to Top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <!-- CSS Responsive adjustments for corporate layout columns -->
+    <style>
+        @media (max-width: 768px) {
+            .leadership-photo {
+                height: 250px !important;
+                border-radius: 20px 20px 0 0 !important;
+            }
+            .photo-card.full {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
+    <!-- Animations Scripts -->
+    <script src="script.js?v=2.1"></script>
+    <!-- Get Updates Modal -->
+    <div class="modal-overlay" id="updates-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="btn-close-modal" aria-label="Close Modal">&times;</button>
+            
+            <!-- Form State -->
+            <div id="modal-form-state">
+                <div class="modal-header">
+                    <h3>Get Updates</h3>
+                    <p>Subscribe to receive exploration breakthroughs, corporate news, and financial updates directly to your inbox.</p>
+                </div>
+                <form class="modal-form" id="newsletter-modal-form" onsubmit="event.preventDefault(); showModalSuccess();">
+                    <div class="input-group">
+                        <label for="modal-name">Full Name</label>
+                        <input type="text" id="modal-name" class="input-field" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="modal-email">Email Address</label>
+                        <input type="email" id="modal-email" class="input-field" placeholder="john@example.com" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Press Releases
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            Exploration Updates
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            Financial & Corporate Filings
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit-modal">Subscribe</button>
+                </form>
+            </div>
+            
+            <!-- Success State -->
+            <div class="modal-success-state" id="modal-success-state">
+                <div class="modal-success-icon">✓</div>
+                <h3>Subscription Confirmed</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-top: 10px;">Thank you for subscribing. You have been added to our updates mailing list.</p>
+                <button class="btn-copper" style="margin-top: 25px; padding: 10px 24px;" onclick="closeUpdatesModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Bio Modal -->
+    <div class="modal-overlay" id="team-modal">
+        <div class="modal-content team-modal-content">
+            <button class="modal-close" id="btn-close-team-modal" aria-label="Close Modal">&times;</button>
+            <div class="team-modal-photo-container">
+                <div class="team-modal-placeholder">
+                    <span></span>
+                </div>
+            </div>
+            <div class="team-modal-text-container">
+                <span class="text-eyebrow" id="team-modal-role">Role</span>
+                <h3 id="team-modal-name">Name</h3>
+                <p id="team-modal-bio"></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
